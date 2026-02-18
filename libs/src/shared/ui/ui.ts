@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'libs-ui',
   imports: [],
   templateUrl: './ui.html',
-  styleUrl: './ui.css',
+  styleUrl: './ui.scss',
 })
 export class Ui {}

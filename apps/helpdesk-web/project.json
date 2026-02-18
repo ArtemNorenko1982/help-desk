@@ -20,7 +20,9 @@
             "input": "apps/helpdesk-web/public"
           }
         ],
-        "styles": ["apps/helpdesk-web/src/styles.css"]
+        "styles": ["apps/helpdesk-web/src/tailwind.css",
+                   "apps/helpdesk-web/src/styles.scss"
+                  ]
       },
       "configurations": {
         "production": {
