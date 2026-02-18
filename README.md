@@ -27,17 +27,24 @@ This is structured for long-term product evolution.
 
 # 🏗 Architecture Overview
 
-apps/
-helpdesk-web/ → Main Angular application
+- apps/
 
-libs/
-core/
-layout/ → AppShell, Header, Footer
-dashboard/
-features/ → Dashboard
-data-access/ → API layer (planned)
-shared/
-ui/ → Reusable UI primitives (planned)
+  - helpdesk-web/ → Main Angular application
+
+- libs/
+
+  - src/
+    - core/
+      - auth/
+      - config/
+      - layout/ → AppShell, Header, Footer
+      - .../
+    - dashboard/
+      - data-access/ → API layer (planned)
+      - features/ → Dashboard
+    - shared/
+      - styles/
+      - ui/
 
 ---
 

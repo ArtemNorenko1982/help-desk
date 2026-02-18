@@ -1,7 +1,7 @@
 {
-  "name": "ui",
+  "name": "libs",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/ui/src",
+  "sourceRoot": "libs/src",
   "prefix": "lib",
   "projectType": "library",
   "tags": [],
@@ -10,7 +10,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "packages/ui/jest.config.ts"
+        "jestConfig": "libs/jest.config.ts"
       }
     },
     "lint": {
