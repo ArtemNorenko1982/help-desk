@@ -1,77 +1,187 @@
-# AngularDemo
+# 🛠 Help Desk Web Platform
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+Enterprise-ready Help Desk dashboard platform built with:
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+- Angular
+- Nx Monorepo
+- Chart.js
+- TailwindCSS + SCSS
+- Modular feature-driven architecture
+- Designed for Azure deployment
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+---
 
-## Run tasks
+# 🎯 Project Vision
 
-To run the dev server for your app, use:
+This repository represents the foundation of a scalable Help Desk platform.
 
-```sh
-npx nx serve angular-demo
-```
+The system is designed to:
 
-To create a production bundle:
+- Provide real-time operational visibility
+- Monitor ticket lifecycle metrics
+- Support multi-role architecture
 
-```sh
-npx nx build angular-demo
-```
+This is structured for long-term product evolution.
 
-To see all available targets to run for a project, run:
+---
 
-```sh
-npx nx show project angular-demo
-```
+# 🏗 Architecture Overview
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+apps/
+helpdesk-web/ → Main Angular application
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+libs/
+core/
+layout/ → AppShell, Header, Footer
+dashboard/
+features/ → Dashboard
+data-access/ → API layer (planned)
+shared/
+ui/ → Reusable UI primitives (planned)
 
-## Add new projects
+---
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
+# 🚀 Local Development
 
-Use the plugin's generator to create new projects.
+Install dependencies:
 
-To generate a new application, use:
+    npm install
 
-```sh
-npx nx g @nx/angular:app demo
-```
+Run development server:
 
-To generate a new library, use:
+    npx nx serve helpdesk-web
 
-```sh
-npx nx g @nx/angular:lib mylib
-```
+App runs at:
+http://localhost:4200
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+---
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+# 🏗 Production Build
 
+    npx nx build helpdesk-web
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Output directory:
+dist/apps/helpdesk-web
 
-## Install Nx Console
+---
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+# 🔎 Nx Targets
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Inspect available targets:
 
-## Useful links
+    npx nx show project helpdesk-web
 
-Learn more:
+Common targets:
 
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- serve → Run dev server
+- build → Production build
+- test → Run unit tests
+- lint → Lint project
+- preview → Preview production build (if configured)
 
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+---
+
+# 🧪 Testing
+
+    npx nx test helpdesk-web
+
+---
+
+# 🧹 Linting
+
+    npx nx lint helpdesk-web
+
+---
+
+# 🌍 Environment Configuration
+
+Located in:
+
+apps/helpdesk-web/src/environments/
+
+Example:
+
+    export const environment = {
+      production: false,
+      apiUrl: 'http://localhost:3000/api',
+    };
+
+---
+
+# ☁ Azure Deployment
+
+## Azure Static Web Apps (Recommended)
+
+Build:
+
+    npx nx build helpdesk-web --configuration=production
+
+Deploy via Azure CLI or GitHub Actions.
+
+## Azure App Service
+
+Build:
+
+    npx nx build helpdesk-web --configuration=production
+
+Deploy:
+
+    az webapp up --name helpdesk-web --resource-group my-resource-group --runtime "NODE:20-lts"
+
+---
+
+# 🐳 Docker Deployment (Optional)
+
+Example Dockerfile:
+
+    FROM nginx:alpine
+    COPY dist/apps/helpdesk-web /usr/share/nginx/html
+    EXPOSE 80
+    CMD ["nginx", "-g", "daemon off;"]
+
+Build:
+
+    docker build -t helpdesk-web .
+
+Run:
+
+    docker run -p 8080:80 helpdesk-web
+
+---
+
+# 🔐 Security Roadmap
+
+- RBAC
+- JWT / Azure AD integration
+- HTTP interceptors
+- Centralized error handling
+- Secure production build
+
+---
+
+# 📈 Future Roadmap
+
+- Backend integration
+- Multi-tenant support
+- SLA monitoring
+- Real-time updates
+- CI/CD with Azure
+- Observability (App Insights)
+
+---
+
+# 📌 Tech Stack
+
+- Angular
+- Nx
+- TypeScript/C#
+- Chart.js
+- TailwindCSS
+- SCSS
+- Signals
+
+---
+
+# 📄 License
+
+Proprietary – Internal Product Foundation.

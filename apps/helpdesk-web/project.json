@@ -1,26 +1,26 @@
 {
-  "name": "angular-demo",
+  "name": "helpdesk-web",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/angular-demo/src",
+  "sourceRoot": "apps/helpdesk-web/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular/build:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/angular-demo",
-        "browser": "apps/angular-demo/src/main.ts",
+        "outputPath": "dist/apps/helpdesk-web",
+        "browser": "apps/helpdesk-web/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/angular-demo/tsconfig.app.json",
+        "tsConfig": "apps/helpdesk-web/tsconfig.app.json",
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/angular-demo/public"
+            "input": "apps/helpdesk-web/public"
           }
         ],
-        "styles": ["apps/angular-demo/src/styles.css"]
+        "styles": ["apps/helpdesk-web/src/styles.css"]
       },
       "configurations": {
         "production": {
@@ -51,10 +51,10 @@
       "executor": "@angular/build:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "angular-demo:build:production"
+          "buildTarget": "helpdesk-web:build:production"
         },
         "development": {
-          "buildTarget": "angular-demo:build:development"
+          "buildTarget": "helpdesk-web:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -62,7 +62,7 @@
     "extract-i18n": {
       "executor": "@angular/build:extract-i18n",
       "options": {
-        "buildTarget": "angular-demo:build"
+        "buildTarget": "helpdesk-web:build"
       }
     },
     "lint": {
@@ -72,15 +72,15 @@
       "executor": "@nx/vite:test",
       "outputs": ["{options.reportsDirectory}"],
       "options": {
-        "reportsDirectory": "../../coverage/apps/angular-demo"
+        "reportsDirectory": "../../coverage/apps/helpdesk-web"
       }
     },
     "serve-static": {
       "continuous": true,
       "executor": "@nx/web:file-server",
       "options": {
-        "buildTarget": "angular-demo:build",
-        "staticFilePath": "dist/apps/angular-demo/browser",
+        "buildTarget": "helpdesk-web:build",
+        "staticFilePath": "dist/apps/helpdesk-web/browser",
         "spa": true
       }
     }
