@@ -59,7 +59,7 @@
       "unitTestRunner": "jest"
     },
     "@nx/angular:component": {
-      "style": "css"
+      "style": "scss"
     }
   },
   "nxCloudId": "69944f17bfe8de89ffd772bf"
