@@ -1,0 +1,27 @@
+<header class="sticky top-0 z-40 border-b border-ui-border bg-ui-surface/90 backdrop-blur">
+  <div class="mx-auto max-w-7xl px-4 py-3 flex items-center gap-3">
+    <!-- Mobile menu button -->
+    <ui-button class="lg:hidden" variant="ghost" size="md" (click)="menuClick.emit()" aria-label="Open menu">
+      ☰
+    </ui-button>
+
+    <!-- Brand -->
+    <h1 class="md:block flex-1 text-lg font-semibold">{{ title }}</h1>
+
+    <!-- Search (hidden on xs, grows in middle) -->
+    <div class="hidden md:block flex-1">
+      <ui-input size="md" placeholder="Search tickets..." (input)="searchInput.emit($event)" />
+    </div>
+
+    <!-- Header actions -->
+    <div class="ml-auto flex items-center gap-2">
+      <ui-button variant="danger" size="md" (click)="requestAssistance.emit()">
+        <span>+</span>
+        {{assistanceButtonLabel}}
+      </ui-button>
+      <ui-button variant="ghost" size="md" (click)="loginClick.emit()">
+        {{ loginButtonLabel }}
+      </ui-button>
+    </div>
+  </div>
+</header>
