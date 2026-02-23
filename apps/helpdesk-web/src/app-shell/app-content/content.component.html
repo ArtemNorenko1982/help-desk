@@ -1,0 +1,29 @@
+<!-- Main layout container -->
+<!-- Content -->
+<main class="flex-1 py-4 min-w-0">
+  <div class="mx-auto max-w-7xl flex items-center gap-4 mt-8">
+    <ui-card class="w-80">
+      <ui-card-header>
+        <ui-card-title>New request</ui-card-title>
+        <ui-badge variant="warning" size="sm">
+          Warning
+        </ui-badge>
+        <ui-card-subtitle>
+          Please fill out the form below to request assistance from our support team. Our team will review your
+          request and get back to you as soon as possible.
+        </ui-card-subtitle>
+      </ui-card-header>
+      <ui-card-content>
+        <ui-input placeholder="Enter your name" size="md" class="mb-4"></ui-input>
+        <ui-input placeholder="Enter your email" size="md" class="mb-4"></ui-input>
+        <ui-input placeholder="Describe your issue" size="md" class="mb-4" type="text"></ui-input>
+      </ui-card-content>
+      <ui-card-footer>
+        <ui-button variant="primary" size="sm">
+          Request Assistance
+        </ui-button>
+      </ui-card-footer>
+    </ui-card>
+  </div>
+  <router-outlet />
+</main>
