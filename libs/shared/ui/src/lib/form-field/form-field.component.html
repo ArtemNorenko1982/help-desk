@@ -1,0 +1,12 @@
+<div [class]="classes">
+  <label @if(label) [attr.for]="controlId" class="block text-sm font-medium text-ui-text mb-1">
+    {{ label }}
+    <span @if(required) class="text-status-danger">*</span>
+  </label>
+
+  <ng-content></ng-content>
+
+  <p @if(hintText && !hasError) class="text-xs text-ui-text" [id]="controlId+'-hint'">{{ hintText }}</p>
+
+  <p @if(hasError) class="text-xs text-status-danger" [id]="controlId+'-error'">{{ errorText }}</p>
+</div>
