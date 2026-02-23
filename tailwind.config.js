@@ -1,6 +1,8 @@
+const { text } = require('stream/consumers');
+
 /** @type {import('tailwindcss').Config} */
-module.export = {
-  content: ['.apps/**/src/**/*.{html,ts}', './libs/**/src/**/*.{html,ts}'],
+module.exports = {
+  content: ['./apps/**/src/**/*.{html,ts}', './libs/**/src/**/*.{html,ts}'],
   theme: {
     extend: {
       colors: {
@@ -19,6 +21,7 @@ module.export = {
           border: '#E2E8F0',
           text: '#0F172A',
           text2: '#475569',
+          text3: '#f9f6f6',
           muted: '#64748B',
         },
         status: {

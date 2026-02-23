@@ -59,8 +59,12 @@
       "unitTestRunner": "jest"
     },
     "@nx/angular:component": {
-      "style": "scss"
-    }
-  },
-  "nxCloudId": "69944f17bfe8de89ffd772bf"
+      "style": "scss",
+      "standalone": true,
+      "changeDetection": "OnPush",
+      "export": true,
+      "type": "component"
+    },
+    "nxCloudId": "69944f17bfe8de89ffd772bf"
+  }
 }
