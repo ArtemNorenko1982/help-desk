@@ -1,0 +1,28 @@
+@if (mode === 'side') {
+<aside class="py-4 transition-all duration-200" [ngClass]="isSidebarCollapsed ? 'w-16' : 'w-64'">
+  <div class="rounded-xl border border-ui-border bg-ui-surface shadow-sm overflow-hidden h-full">
+    <ng-content> </ng-content>
+  </div>
+</aside>
+}
+
+@if (mode === 'drawer' && isDrawerOpened) {
+<aside class="hidden lg:block py-4" [ngClass]="isSidebarCollapsed ? 'w-16' : 'w-64'">
+  <div class="rounded-xl border border-ui-border bg-ui-surface shadow-sm overflow-hidden">
+    <!-- Sidebar top row -->
+    <div class="flex items-center justify-between border-b border-ui-border p-2">
+      <div class="text-sm font-semibold px-2" [ngClass]="isSidebarCollapsed ? 'hidden' : 'block'">
+        Navigation
+      </div>
+
+      <ui-button class="md" (click)="collapseSidebar()" [attr.aria-label]="isSidebarCollapsed">
+        @if (isSidebarCollapsed) {<span>»</span>}
+        @if (!isSidebarCollapsed) {<span>«</span>}
+      </ui-button>
+    </div>
+
+    <!-- Nav -->
+
+  </div>
+</aside>
+}
