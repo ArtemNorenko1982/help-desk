@@ -13,8 +13,6 @@ import {
   InputComponent,
 } from '@shared-ui';
 
-type NavItem = { label: string; icon: string; link: string };
-
 @Component({
   selector: 'app-content',
   imports: [

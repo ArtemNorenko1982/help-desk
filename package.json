@@ -24,6 +24,7 @@
     "@angular/cli": "~20.1.0",
     "@angular/compiler-cli": "~20.1.0",
     "@angular/language-service": "~20.1.0",
+    "@angular/material": "^21.2.0",
     "@eslint/js": "^9.8.0",
     "@nx/angular": "21.4.0",
     "@nx/eslint": "21.4.0",
