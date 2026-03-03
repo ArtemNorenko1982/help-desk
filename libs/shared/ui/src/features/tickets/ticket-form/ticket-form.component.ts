@@ -4,7 +4,7 @@ import {
   Output,
   inject,
 } from '@angular/core';
-import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 import { ButtonComponent } from '../../../lib/button/button.component';
 import { TicketFormType } from './ticket-form.type';
