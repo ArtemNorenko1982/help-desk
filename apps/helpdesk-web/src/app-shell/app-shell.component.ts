@@ -2,13 +2,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   HostListener,
+  inject,
 } from '@angular/core';
 
 import { HeaderComponent } from './app-header/header.component';
 import { ContentComponent } from './app-content/content.component';
 import { FooterComponent } from './app-footer/footer.component';
 import { AsideComponent, ButtonComponent } from '@shared-ui';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AppNavMenuComponent } from '../app-nav-menu/app-nav-menu.component';
 
 type NavItem = { label: string; icon: string; link: string };
@@ -31,6 +32,7 @@ type NavItem = { label: string; icon: string; link: string };
 export class AppShellComponent {
   // might be taken from service in real app
   protected title = 'Help Desk';
+  private router = inject(Router);
 
   nav: NavItem[] = [
     { label: 'Dashboard', icon: '📊', link: '/dashboard' },
@@ -56,7 +58,7 @@ export class AppShellComponent {
   }
 
   assistanceRequestHandler(): void {
-    alert('Assistance requested!');
+    this.router.navigate(['tickets', 'create']);
   }
 
   loginHandler(): void {
