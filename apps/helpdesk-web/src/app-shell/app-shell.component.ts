@@ -62,7 +62,7 @@ export class AppShellComponent {
   }
 
   loginHandler(): void {
-    alert('Login clicked!');
+    this.router.navigate(['/login']);
   }
 
   searchHandler(value: Event): void {

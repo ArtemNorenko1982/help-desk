@@ -57,7 +57,8 @@
           "buildTarget": "helpdesk-web:build:production"
         },
         "development": {
-          "buildTarget": "helpdesk-web:build:development"
+          "buildTarget": "helpdesk-web:build:development",
+          "proxyConfig": "apps/helpdesk-web/proxy.conf.json"
         }
       },
       "defaultConfiguration": "development"
