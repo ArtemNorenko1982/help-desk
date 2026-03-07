@@ -1,23 +1,30 @@
-<form class="max-w-lg mx-auto p-4 bg-white shadow-md rounded-md" (ngSubmit)="submit()">
+<form class="max-w-lg mx-auto p-4 bg-white shadow-md rounded-md" [formGroup]="ticketForm" (ngSubmit)="submit()">
   <div class="mb-4">
-    <label for="title" class="block text-sm font-medium text-gray-700">{{formTitleLabel}}</label>
+    <label for="title"
+      class="block text-sm font-medium text-gray-700">{{ticketForm.controls.title.getRawValue()}}</label>
+  </div>
+
+  <input id="email" type="email" formControlName="email"
+    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+  <ui-form-field label="Email" [controlId]="'email'" [formControl]="ticketForm.controls.email"
+    hintText="We'll never share your email.">
+  </ui-form-field>
+
+  <div class="mb-4">
+    <label for="priority" class="block text-sm font-medium text-gray-700">Ticket Priority</label>
+    <select id="priority" name="priority"
+      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      formControlName="priority">
+      @for(item of ticketPriorities; track $index){
+      <option value="item.value">{{item.label}}</option>
+      }
+    </select>
   </div>
 
   <div class="mb-4">
     <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
     <textarea id="description" name="description" rows="4"
       class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
-  </div>
-
-  <div class="mb-4">
-    <label for="priority" class="block text-sm font-medium text-gray-700">Priority</label>
-    <select id="priority" name="priority"
-      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-      <option value="">Select priority</option>
-      <option value="low">Low</option>
-      <option value="medium">Medium</option>
-      <option value="high">High</option>
-    </select>
   </div>
 
   <ui-button type="button" variant="ghost" size="md" (click)="submit()">
