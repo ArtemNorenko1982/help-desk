@@ -32,3 +32,9 @@ export * from './features/tickets/ticket-edit-page/ticket-edit-page.component';
 
 export * from './features/tickets/ticket-form/ticket-form.component';
 export * from './features/tickets/ticket.routes';
+
+export * from './lib/models/auth.models';
+export * from './lib/services/http.service';
+export * from './features/auth/services/auth.service';
+export * from './features/auth/login/login-page.component';
+export * from './features/auth/auth.routes';

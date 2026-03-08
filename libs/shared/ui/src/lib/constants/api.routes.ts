@@ -1,0 +1,1 @@
+export const API_ROUTES = { AUTH: { BASE: '/api/v1/auth', LOGIN: '/api/v1/auth/login', REGISTER: '/api/v1/auth/register', }, } as const;
