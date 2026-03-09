@@ -3,5 +3,5 @@ export const LOGIN_UI_STRINGS = {
   usernameLabel: 'Username',
   passwordLabel: 'Password',
   submitButton: 'Log In',
-  forgotPassword: 'Forgot your password?'
+  forgotPassword: 'Forgot your password?',
 };

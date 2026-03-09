@@ -6,9 +6,10 @@ import {
   LoginRequest,
   RegisterRequest,
 } from '../../../lib/models/auth.models';
-
-const AUTH_TOKEN_KEY = 'hd_auth_token';
-const API_BASE = '/api/v1/auth';
+import {
+  V1_API_ROUTES,
+  AUTH_TOKEN_KEY,
+} from '../../../lib/constants/v1.api.routes';
 
 @Injectable({
   providedIn: 'root',
@@ -24,13 +25,13 @@ export class AuthService {
 
   login(credentials: LoginRequest): Observable<AuthResponse> {
     return this.httpService
-      .post<AuthResponse>(`${API_BASE}/login`, credentials)
+      .post<AuthResponse>(`${V1_API_ROUTES.AUTH.LOGIN}`, credentials)
       .pipe(tap((response) => this.persistUser(response)));
   }
 
   register(data: RegisterRequest): Observable<AuthResponse> {
     return this.httpService
-      .post<AuthResponse>(`${API_BASE}/register`, data)
+      .post<AuthResponse>(`${V1_API_ROUTES.AUTH.REGISTER}`, data)
       .pipe(tap((response) => this.persistUser(response)));
   }
 
