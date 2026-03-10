@@ -1,0 +1,58 @@
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="auth-form">
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Email</mat-label>
+    <input
+      matInput
+      type="email"
+      formControlName="email"
+      placeholder="you@example.com"
+      autocomplete="email"
+    />
+
+    <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+      Email is required
+    </mat-error>
+    <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+      Enter a valid email address
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      [type]="hidePassword() ? 'password' : 'text'"
+      formControlName="password"
+      autocomplete="current-password"
+    />
+    <button
+      matSuffix
+      type="button"
+      (click)="hidePassword.set(!hidePassword())"
+      [attr.aria-label]="hidePassword() ? 'Show password' : 'Hide password'"
+    ></button>
+    <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+      Password is required
+    </mat-error>
+    <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
+      Password must be at least 8 characters
+    </mat-error>
+  </mat-form-field>
+
+  <p *ngIf="errorMessage()" class="error-message">{{ errorMessage() }}</p>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    class="full-width submit-btn"
+    [disabled]="isLoading()"
+  >
+    <mat-spinner
+      *ngIf="isLoading()"
+      diameter="20"
+      class="inline-spinner"
+    ></mat-spinner>
+    <span *ngIf="!isLoading()">Sign In</span>
+  </button>
+</form>

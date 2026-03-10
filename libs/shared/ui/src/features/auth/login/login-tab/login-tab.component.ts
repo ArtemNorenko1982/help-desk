@@ -5,12 +5,9 @@ import {
   signal,
 } from '@angular/core';
 import {
-  AbstractControl,
   FormBuilder,
   FormsModule,
   ReactiveFormsModule,
-  ValidationErrors,
-  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -22,22 +19,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgIf } from '@angular/common';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
-function passwordMatchValidator(): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const password = control.get('password')?.value as string | null;
-    
-    const confirmPassword = control.get('confirmPassword')?.value as string | null;
-    if (password && confirmPassword && password !== confirmPassword) {
-      return { passwordMismatch: true };
-    }
-    return null;
-  };
-}
 
 @Component({
-  selector: 'ui-login-page',
+  selector: 'ui-login-tab',
   imports: [
     FormsModule,
     ReactiveFormsModule,
@@ -50,11 +36,11 @@ function passwordMatchValidator(): ValidatorFn {
     MatProgressSpinnerModule,
     NgIf,
   ],
-  templateUrl: './login-page.component.html',
-  styleUrl: './login-page.component.scss',
+  templateUrl: './login-tab.component.html',
+  styleUrls: ['./login-tab.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginPageComponent {
+export class LoginTabComponent {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
@@ -69,16 +55,6 @@ export class LoginPageComponent {
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
-  readonly registerForm = this.fb.group(
-    {
-      username: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', Validators.required],
-    },
-    { validators: passwordMatchValidator() }
-  );
-
   onLogin(): void {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
@@ -92,31 +68,6 @@ export class LoginPageComponent {
 
     this.authService
       .login({ email: email!, password: password! })
-      .subscribe({
-        next: () => {
-          this.isLoading.set(false);
-          this.router.navigate(['/tickets']);
-        },
-        error: (err: Error) => {
-          this.isLoading.set(false);
-          this.errorMessage.set(err.message);
-        },
-      });
-  }
-
-  onRegister(): void {
-    if (this.registerForm.invalid) {
-      this.registerForm.markAllAsTouched();
-      return;
-    }
-
-    this.isLoading.set(true);
-    this.errorMessage.set(null);
-
-    const { username, email, password } = this.registerForm.getRawValue();
-
-    this.authService
-      .register({ username: username!, email: email!, password: password! })
       .subscribe({
         next: () => {
           this.isLoading.set(false);

@@ -3,7 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { HttpService } from '../../../lib/services/http.service';
-import { AuthService } from '../../../lib/services/auth.service';
+import { AuthService } from '@lib/services/auth.service';
 import { TicketModel } from '../../../lib/models/ticket.models';
 
 @Injectable({
