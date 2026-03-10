@@ -11,6 +11,13 @@ import {
   AUTH_TOKEN_KEY,
 } from '../../../lib/constants/v1.api.routes';
 
+// TODO:
+// 1. Interceptor for auth token management and error handling
+//    catch 401 and redirect to Login page
+// 2. Add Auth HTTP Headers
+// 3. Add guard to protect routes
+// 4. Role base 
+
 @Injectable({
   providedIn: 'root',
 })

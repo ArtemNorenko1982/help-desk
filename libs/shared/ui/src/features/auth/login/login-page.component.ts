@@ -27,6 +27,7 @@ import { AuthService } from '../services/auth.service';
 function passwordMatchValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const password = control.get('password')?.value as string | null;
+    
     const confirmPassword = control.get('confirmPassword')?.value as string | null;
     if (password && confirmPassword && password !== confirmPassword) {
       return { passwordMismatch: true };
@@ -72,7 +73,7 @@ export class LoginPageComponent {
     {
       username: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', Validators.required],
     },
     { validators: passwordMatchValidator() }
