@@ -36,6 +36,8 @@ export * from './features/tickets/ticket.routes';
 export * from './lib/models/auth.models';
 export * from './lib/services/http.service';
 export * from './features/auth/auth.routes';
+export * from './features/auth/auth.interceptor';
+export * from './features/auth/auth.guard';
 export * from './features/auth/services/auth.service';
 export * from './features/auth/login/login-tab/login-tab.component';
 export * from './features/auth/login/register-tab/register-tab.component';

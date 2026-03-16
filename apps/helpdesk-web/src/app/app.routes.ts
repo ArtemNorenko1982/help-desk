@@ -1,4 +1,5 @@
 import { Route } from '@angular/router';
+import { authGuard } from '@shared-ui';
 
 export const appRoutes: Route[] = [
   // { path: 'dashboard', component: },
@@ -8,6 +9,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'tickets',
+    canActivate: [authGuard],
     loadChildren: () => import('@shared-ui').then((m) => m.ticketRoutes),
   },
   // { path: 'reports', component:  },
