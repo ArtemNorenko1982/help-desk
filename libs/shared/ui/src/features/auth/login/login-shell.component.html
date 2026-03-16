@@ -1,0 +1,25 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>Help Desk</mat-card-title>
+      <mat-card-subtitle>Sign in or create a new account</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-tab-group
+        aria-label="Authentication options"
+        animationDuration="200ms"
+        (selectedTabChange)="errorMessage.set(null)"
+      >
+        <!-- LOGIN TAB -->
+        <mat-tab label="Sign In">
+          <ui-login-tab></ui-login-tab>
+        </mat-tab>
+        <!-- REGISTER TAB -->
+        <mat-tab label="Create Account">
+          <ui-register-tab></ui-register-tab>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</div>
