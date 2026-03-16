@@ -8,6 +8,13 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+export function authHeader(
+  token: string | null
+): Record<string, string> {
+  if (!token) return {};
+  return { Authorization: `Bearer ${token}` };
+}
+
 export interface RequestOptions {
   headers?: HttpHeaders | Record<string, string | string[]>;
   params?: HttpParams | Record<string, string | number | boolean>;
