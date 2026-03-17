@@ -1,8 +1,14 @@
-import { Directive, effect, inject, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+  Directive,
+  effect,
+  inject,
+  TemplateRef,
+  ViewContainerRef,
+} from '@angular/core';
 import { AuthService } from '../../features/auth/services/auth.service';
 
 @Directive({
-  selector: '[appIfAuthorized]',
+  selector: '[dirIfAuthorized]',
   standalone: true,
 })
 export class IfAuthorizedDirective {

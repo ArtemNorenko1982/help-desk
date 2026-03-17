@@ -1,12 +1,12 @@
 <nav class="p-2 space-y-1">
   @for (item of navItem; track $index) {
-    @if (!item.requiresAuth) {
-      <ng-container *ngTemplateOutlet="navLink; context: {$implicit: item}"></ng-container>
-    } @else {
-      <ng-container *appIfAuthorized>
-        <ng-container *ngTemplateOutlet="navLink; context: {$implicit: item}"></ng-container>
-      </ng-container>
-    }
+  @if (!item.requiresAuth) {
+  <ng-container *ngTemplateOutlet="navLink; context: {$implicit: item}"></ng-container>
+  } @else {
+  <ng-container *dirIfAuthorized>
+    <ng-container *ngTemplateOutlet="navLink; context: {$implicit: item}"></ng-container>
+  </ng-container>
+  }
   }
 </nav>
 

@@ -33,13 +33,13 @@
     </div>
     <nav class="space-y-1">
       @for (item of nav; track $index) {
-        @if (!item.requiresAuth) {
-          <ng-container *ngTemplateOutlet="drawerLink; context: {$implicit: item}"></ng-container>
-        } @else {
-          <ng-container *appIfAuthorized>
-            <ng-container *ngTemplateOutlet="drawerLink; context: {$implicit: item}"></ng-container>
-          </ng-container>
-        }
+      @if (!item.requiresAuth) {
+      <ng-container *ngTemplateOutlet="drawerLink; context: {$implicit: item}"></ng-container>
+      } @else {
+      <ng-container *dirIfAuthorized>
+        <ng-container *ngTemplateOutlet="drawerLink; context: {$implicit: item}"></ng-container>
+      </ng-container>
+      }
       }
     </nav>
   </div>
