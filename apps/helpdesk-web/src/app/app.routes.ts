@@ -16,3 +16,6 @@ export const appRoutes: Route[] = [
   // { path: 'settings', component:  },
   // { path: '**', component:  }
 ];
+
+// 1. login component - separate form without a thing
+// 2. in case user is authorised -> redirect to root page (dashboard or tickets)
