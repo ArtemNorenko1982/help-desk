@@ -1,5 +1,16 @@
 <nav class="p-2 space-y-1">
   @for (item of navItem; track $index) {
+    @if (!item.requiresAuth) {
+      <ng-container *ngTemplateOutlet="navLink; context: {$implicit: item}"></ng-container>
+    } @else {
+      <ng-container *appIfAuthorized>
+        <ng-container *ngTemplateOutlet="navLink; context: {$implicit: item}"></ng-container>
+      </ng-container>
+    }
+  }
+</nav>
+
+<ng-template #navLink let-item>
   <a [routerLink]="item.link" routerLinkActive="bg-ui-surfaceAlt"
     class="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-ui-surfaceAlt"
     [attr.title]="isSidebarCollapsed ? item.label : null" (click)="itemClicked.emit(item)">
@@ -8,5 +19,4 @@
       {{ item.label }}
     </span>
   </a>
-  }
-</nav>
+</ng-template>

@@ -42,3 +42,4 @@ export * from './features/auth/services/auth.service';
 export * from './features/auth/login/login-tab/login-tab.component';
 export * from './features/auth/login/register-tab/register-tab.component';
 export * from './features/auth/login/login-shell.component';
+export * from './lib/directives/if-authorized.directive';

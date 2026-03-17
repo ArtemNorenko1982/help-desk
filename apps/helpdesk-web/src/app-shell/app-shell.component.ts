@@ -8,11 +8,12 @@ import {
 import { HeaderComponent } from './app-header/header.component';
 import { ContentComponent } from './app-content/content.component';
 import { FooterComponent } from './app-footer/footer.component';
-import { AsideComponent, ButtonComponent } from '@shared-ui';
+import { AsideComponent, ButtonComponent, IfAuthorizedDirective } from '@shared-ui';
 import { Router, RouterLink } from '@angular/router';
+import { NgTemplateOutlet } from '@angular/common';
 import { AppNavMenuComponent } from '../app-nav-menu/app-nav-menu.component';
 
-type NavItem = { label: string; icon: string; link: string };
+type NavItem = { label: string; icon: string; link: string; requiresAuth?: boolean };
 
 @Component({
   selector: 'app-shell',
@@ -24,6 +25,8 @@ type NavItem = { label: string; icon: string; link: string };
     FooterComponent,
     ButtonComponent,
     AppNavMenuComponent,
+    IfAuthorizedDirective,
+    NgTemplateOutlet,
   ],
   templateUrl: './app-shell.component.html',
   styleUrl: './app-shell.component.scss',
@@ -37,7 +40,7 @@ export class AppShellComponent {
   nav: NavItem[] = [
     { label: 'Dashboard', icon: '📊', link: '/dashboard' },
     { label: 'Tickets', icon: '🎫', link: '/tickets' },
-    { label: 'Reports', icon: '📈', link: '/reports' },
+    { label: 'Reports', icon: '📈', link: '/reports', requiresAuth: true },
     { label: 'Settings', icon: '⚙️', link: '/settings' },
   ];
 
