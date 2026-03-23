@@ -13,6 +13,9 @@ import { AuthStateService } from '@shared-ui';
   standalone: true,
 })
 export class HasPermissionDirective {
+  // 03/17/2026
+  // TODO: replace the whole logic with a proper implementsation
+  // AI tools are not good at this point - extremely complex logic
   private readonly templateRef = inject(TemplateRef);
   private readonly viewContainerRef = inject(ViewContainerRef);
   private readonly authStateService = inject(AuthStateService);

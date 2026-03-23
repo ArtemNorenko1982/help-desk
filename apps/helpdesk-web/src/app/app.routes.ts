@@ -28,3 +28,6 @@ export const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: '**', component: ForbiddenComponent, pathMatch: 'full' },
 ];
+
+// 1. login component - separate form without a thing
+// 2. in case user is authorised -> redirect to root page (dashboard or tickets)
