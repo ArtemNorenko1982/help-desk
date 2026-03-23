@@ -1,33 +1,30 @@
-import { inject, Injectable, signal } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { catchError, Observable, tap, of } from 'rxjs';
 import { HttpService } from '../../../lib/services/http.service';
 import {
   AuthResponse,
   LoginRequest,
   RegisterRequest,
 } from '../../../lib/models/auth.models';
-import {
-  V1_API_ROUTES,
-  AUTH_TOKEN_KEY,
-} from '../../../lib/constants/v1.api.routes';
+import { V1_API_ROUTES } from '../../../lib/constants/v1.api.routes';
+import { AuthStateService } from '@shared-ui';
 
 // TODO:
 // 1. Interceptor for auth token management and error handling
 //    catch 401 and redirect to Login page
 // 2. Add Auth HTTP Headers
 // 3. Add guard to protect routes
-// 4. Role base 
+// 4. Role base
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private readonly httpService = inject(HttpService);
-
-  readonly currentUser = signal<AuthResponse | null>(this.loadStoredUser());
+  private readonly authStateService = inject(AuthStateService);
 
   get isLoggedIn(): boolean {
-    return !!this.currentUser();
+    return !!this.authStateService.currentUser;
   }
 
   login(credentials: LoginRequest): Observable<AuthResponse> {
@@ -43,32 +40,32 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem(AUTH_TOKEN_KEY);
-    this.currentUser.set(null);
+    this.authStateService.logout();
   }
 
   getToken(): string | null {
-    return this.currentUser()?.token ?? null;
+    return this.authStateService.currentUser?.token || null;
+  }
+
+  getMe(): Observable<AuthResponse> {
+    return this.httpService.get<AuthResponse>(`${V1_API_ROUTES.AUTH.ME}`);
+  }
+
+  restoreSession(): Observable<AuthResponse | null> {
+    return this.getMe().pipe(
+      tap((response) => {
+        this.persistUser(response);
+        this.authStateService.setInitialized(true);
+      }),
+      catchError(() => {
+        this.authStateService.logout();
+        this.authStateService.setInitialized(true);
+        return of(null);
+      })
+    );
   }
 
   private persistUser(response: AuthResponse): void {
-    localStorage.setItem(AUTH_TOKEN_KEY, JSON.stringify(response));
-    this.currentUser.set(response);
-  }
-
-  private loadStoredUser(): AuthResponse | null {
-    try {
-      const stored = localStorage.getItem(AUTH_TOKEN_KEY);
-      if (!stored) return null;
-
-      const user = JSON.parse(stored) as AuthResponse;
-      if (new Date(user.expiresAt) <= new Date()) {
-        localStorage.removeItem(AUTH_TOKEN_KEY);
-        return null;
-      }
-      return user;
-    } catch {
-      return null;
-    }
+    this.authStateService.setCurrentUser(response);
   }
 }

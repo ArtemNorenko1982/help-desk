@@ -5,21 +5,22 @@ import {
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
-import { AuthService } from '../../features/auth/services/auth.service';
+
+import { AuthStateService } from '@shared-ui';
 
 @Directive({
-  selector: '[dirIfAuthorized]',
+  selector: '[dirHasPermission]',
   standalone: true,
 })
-export class IfAuthorizedDirective {
+export class HasPermissionDirective {
   private readonly templateRef = inject(TemplateRef);
   private readonly viewContainerRef = inject(ViewContainerRef);
-  private readonly authService = inject(AuthService);
+  private readonly authStateService = inject(AuthStateService);
   private isViewCreated = false;
 
   constructor() {
     effect(() => {
-      const isLoggedIn = !!this.authService.currentUser();
+      const isLoggedIn = !!this.authStateService.currentUser;
       if (isLoggedIn && !this.isViewCreated) {
         this.viewContainerRef.createEmbeddedView(this.templateRef);
         this.isViewCreated = true;
