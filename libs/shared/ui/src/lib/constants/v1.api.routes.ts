@@ -3,6 +3,7 @@ export const V1_API_ROUTES = {
     BASE: '/api/v1/auth',
     LOGIN: '/api/v1/auth/login',
     REGISTER: '/api/v1/auth/register',
+    ME: '/api/v1/auth/me',
   },
   TICKETS: {
     GET_MY: '/api/v1/tickets/my',

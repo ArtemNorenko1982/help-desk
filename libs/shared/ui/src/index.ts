@@ -39,6 +39,18 @@ export * from './features/auth/auth.routes';
 export * from './features/auth/auth.interceptor';
 export * from './features/auth/auth.guard';
 export * from './features/auth/services/auth.service';
+export * from './features/auth/services/auth-state.service';
 export * from './features/auth/login/login-tab/login-tab.component';
 export * from './features/auth/login/register-tab/register-tab.component';
 export * from './features/auth/login/login-shell.component';
+export * from './lib/directives/has-permission.directive';
+
+export * from './features/home/home.component';
+
+export * from './features/403/forbidden.component';
+
+export * from './features/dashboard/dashboard.component';
+
+export * from './features/reports/reports.component';
+
+export * from './features/settings/settings.component';

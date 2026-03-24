@@ -10,7 +10,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -18,9 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { NgIf } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
-
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'ui-login-tab',
@@ -43,6 +42,7 @@ import { AuthService } from '../../services/auth.service';
 export class LoginTabComponent {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
   private readonly fb = inject(FormBuilder);
 
   readonly isLoading = signal(false);
@@ -66,17 +66,17 @@ export class LoginTabComponent {
 
     const { email, password } = this.loginForm.getRawValue();
 
-    this.authService
-      .login({ email: email!, password: password! })
-      .subscribe({
-        next: () => {
-          this.isLoading.set(false);
-          this.router.navigate(['/tickets']);
-        },
-        error: (err: Error) => {
-          this.isLoading.set(false);
-          this.errorMessage.set(err.message);
-        },
-      });
+    this.authService.login({ email: email!, password: password! }).subscribe({
+      next: () => {
+        this.isLoading.set(false);
+        const returnUrl =
+          this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
+        this.router.navigateByUrl(returnUrl);
+      },
+      error: (err: Error) => {
+        this.isLoading.set(false);
+        this.errorMessage.set(err.message);
+      },
+    });
   }
 }

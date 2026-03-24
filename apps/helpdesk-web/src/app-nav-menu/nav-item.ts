@@ -1,1 +1,1 @@
-export type NavItem = { label: string; icon: string; link: string };
+export type NavItem = { label: string; icon: string; link: string; requiresAuth?: boolean };

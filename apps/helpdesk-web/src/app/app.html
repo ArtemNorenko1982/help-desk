@@ -1,5 +1,18 @@
 <div class="min-h-[100dvh] bg-ui-bg text-ui-text flex flex-col">
-  <app-shell></app-shell>
+  <app-header title={{title}} (menuClick)="toggleMenu()" (requestAssistance)="assistanceRequestHandler()"
+    (loginClick)="loginHandler()" (searchInput)="searchHandler($event)">
+  </app-header>
+
+  <app-content *ngIf="authState.isInitialized$ | async; else loading
+  " class="flex-1">
+    <router-outlet></router-outlet>
+  </app-content>
+
+  <app-footer></app-footer>
 </div>
 
-<router-outlet></router-outlet>
+<ng-template #loading>
+  <div class="flex-1 flex items-center justify-center">
+    <p>Loading...</p>
+  </div>
+</ng-template>
