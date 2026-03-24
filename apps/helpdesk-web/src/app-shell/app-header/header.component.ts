@@ -11,7 +11,6 @@ import { ButtonComponent, InputComponent, AuthStateService } from '@shared-ui';
 import { RouterLink } from '@angular/router';
 import { NavItem } from '../../app-nav-menu/nav-item';
 import { AppNavMenuComponent } from '../../app-nav-menu/app-nav-menu.component';
-import { CdkNoDataRow } from '@angular/cdk/table';
 import { NgIf, NgTemplateOutlet } from '@angular/common';
 
 const navItems: NavItem[] = [

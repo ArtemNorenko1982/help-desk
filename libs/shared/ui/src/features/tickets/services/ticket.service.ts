@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { HttpService, authHeader } from '../../../lib/services/http.service';
+import { HttpService } from '../../../lib/services/http.service';
 import { AuthService } from '../../auth/services/auth.service';
 import { TicketModel } from '../../../lib/models/ticket.models';
 import { V1_API_ROUTES } from '../../../lib/constants/v1.api.routes';
@@ -13,34 +13,24 @@ export class TicketService {
   private readonly httpService = inject(HttpService);
   private readonly authService = inject(AuthService);
 
-  private getAuthHeaders() {
-    return authHeader(this.authService.getToken());
-  }
-
   getMyTickets(): Observable<TicketModel[]> {
-    return this.httpService.get<TicketModel[]>(V1_API_ROUTES.TICKETS.GET_MY, {
-      headers: this.getAuthHeaders(),
-    });
+    return this.httpService.get<TicketModel[]>(V1_API_ROUTES.TICKETS.GET_MY);
   }
 
   getAllTickets(): Observable<TicketModel[]> {
-    return this.httpService.get<TicketModel[]>(V1_API_ROUTES.TICKETS.GET_ALL, {
-      headers: this.getAuthHeaders(),
-    });
+    return this.httpService.get<TicketModel[]>(V1_API_ROUTES.TICKETS.GET_ALL);
   }
 
   getTicketById(id: number): Observable<TicketModel> {
     return this.httpService.get<TicketModel>(
-      V1_API_ROUTES.TICKETS.GET_BY_ID(id),
-      { headers: this.getAuthHeaders() }
+      V1_API_ROUTES.TICKETS.GET_BY_ID(id)
     );
   }
 
   createTicket(data: Omit<TicketModel, 'id'>): Observable<TicketModel> {
     return this.httpService.post<TicketModel>(
       V1_API_ROUTES.TICKETS.CREATE,
-      data,
-      { headers: this.getAuthHeaders() }
+      data
     );
   }
 
@@ -50,14 +40,11 @@ export class TicketService {
   ): Observable<TicketModel> {
     return this.httpService.put<TicketModel>(
       V1_API_ROUTES.TICKETS.UPDATE(id),
-      data,
-      { headers: this.getAuthHeaders() }
+      data
     );
   }
 
   deleteTicket(id: number): Observable<void> {
-    return this.httpService.delete<void>(V1_API_ROUTES.TICKETS.DELETE(id), {
-      headers: this.getAuthHeaders(),
-    });
+    return this.httpService.delete<void>(V1_API_ROUTES.TICKETS.DELETE(id));
   }
 }
