@@ -1,0 +1,75 @@
+<div class="chart-wrapper">
+  <svg
+    [attr.width]="svgWidth"
+    [attr.height]="svgHeight"
+    class="chart-svg"
+    aria-label="Ticket statistics chart"
+    role="img"
+  >
+    <!-- Y-axis grid lines and labels -->
+    @for (tick of yTicks; track tick.value) {
+      <line
+        [attr.x1]="paddingLeft"
+        [attr.y1]="tick.y"
+        [attr.x2]="svgWidth - paddingRight"
+        [attr.y2]="tick.y"
+        class="grid-line"
+      />
+      <text
+        [attr.x]="paddingLeft - 6"
+        [attr.y]="tick.y + 4"
+        class="axis-label y-label"
+      >{{ tick.value }}</text>
+    }
+
+    <!-- Bars -->
+    @for (group of barGroups; track group.date) {
+      @for (bar of group.bars; track bar.series) {
+        <rect
+          [attr.x]="bar.x"
+          [attr.y]="paddingTop + chartHeight - bar.height"
+          [attr.width]="barWidth"
+          [attr.height]="bar.height"
+          [attr.fill]="bar.color"
+          class="bar"
+          rx="2"
+        >
+          <title>{{ bar.series }}: {{ bar.value }} on {{ group.date }}</title>
+        </rect>
+      }
+
+      <!-- X-axis labels -->
+      <text
+        [attr.x]="group.x"
+        [attr.y]="svgHeight - paddingBottom + 16"
+        class="axis-label x-label"
+      >{{ group.label }}</text>
+    }
+
+    <!-- Axes -->
+    <line
+      [attr.x1]="paddingLeft"
+      [attr.y1]="paddingTop"
+      [attr.x2]="paddingLeft"
+      [attr.y2]="paddingTop + chartHeight"
+      class="axis-line"
+    />
+    <line
+      [attr.x1]="paddingLeft"
+      [attr.y1]="paddingTop + chartHeight"
+      [attr.x2]="svgWidth - paddingRight"
+      [attr.y2]="paddingTop + chartHeight"
+      class="axis-line"
+    />
+  </svg>
+
+  <!-- Legend -->
+  <div class="legend">
+    @for (item of legendItems; track item.series) {
+      <span class="legend-item" [class.legend-item--inactive]="!item.active">
+        <span class="legend-dot" [style.background]="item.color"></span>
+        <span class="legend-text">{{ item.label }}</span>
+      </span>
+    }
+  </div>
+</div>

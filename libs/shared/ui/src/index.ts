@@ -50,6 +50,9 @@ export * from './features/home/home.component';
 export * from './features/403/forbidden.component';
 
 export * from './features/dashboard/dashboard.component';
+export * from './features/dashboard/ticket-stats-chart/ticket-stats-chart.component';
+export * from './features/dashboard/services/dashboard.service';
+export * from './features/dashboard/mock-data/dashboard.mock';
 
 export * from './features/reports/reports.component';
 
