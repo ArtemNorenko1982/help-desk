@@ -1,10 +1,15 @@
+@if (showMenu) {
+<app-nav-menu class="overlay" [style.height]="showMenu ? '100%' : '0'" [navItems]="navItems" [showMenu]="showMenu"
+  (itemClicked)="onItemClicked($event)" (closeMenu)="onMenuClose($event)"></app-nav-menu>
+}
+
 <div class="min-h-[100dvh] bg-ui-bg text-ui-text flex flex-col">
-  <app-header title={{title}} (menuClick)="toggleMenu()" (requestAssistance)="assistanceRequestHandler()"
-    (loginClick)="loginHandler()" (searchInput)="searchHandler($event)">
+  <app-header title={{title}} [showMenu]="showMenu" (menuButtonClick)="toggleMenu($event)"
+    (requestAssistance)="assistanceRequestHandler()" (loginClick)="loginHandler()"
+    (searchInput)="searchHandler($event)">
   </app-header>
 
-  <app-content *ngIf="authState.isInitialized$ | async; else loading
-  " class="flex-1">
+  <app-content *ngIf="authState.isInitialized$ | async; else loading" class="flex-1">
     <router-outlet></router-outlet>
   </app-content>
 
@@ -13,6 +18,8 @@
 
 <ng-template #loading>
   <div class="flex-1 flex items-center justify-center">
-    <p>Loading...</p>
+
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>&nbsp;Loading...</p>
   </div>
 </ng-template>
