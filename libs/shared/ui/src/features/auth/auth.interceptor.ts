@@ -12,8 +12,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   const isAuthRequest =
     req.url.includes(V1_API_ROUTES.AUTH.LOGIN) ||
-    req.url.includes(V1_API_ROUTES.AUTH.REGISTER) ||
-    req.url.includes(V1_API_ROUTES.AUTH.ME);
+    req.url.includes(V1_API_ROUTES.AUTH.REGISTER);
 
   if (isAuthRequest) {
     return next(req);

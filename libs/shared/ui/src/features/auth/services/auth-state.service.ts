@@ -38,7 +38,7 @@ export class AuthStateService {
     this.initializedSubject.next(true);
   }
 
-  private loadStoredUser(): AuthResponse | null {
+  loadStoredUser(): AuthResponse | null {
     let storedUser: AuthResponse | null = null;
     this.currentUser$.subscribe((user) => (storedUser = user)).unsubscribe();
     if (!storedUser) return null;
@@ -47,6 +47,7 @@ export class AuthStateService {
       this.logout();
       return null;
     }
+    console.log('Loaded user from state:', storedUser);
     return storedUser;
   }
 }

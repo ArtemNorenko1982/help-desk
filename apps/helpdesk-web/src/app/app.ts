@@ -5,6 +5,9 @@ import { FooterComponent } from '../app-shell/app-footer/footer.component';
 import { ContentComponent } from '../app-shell/app-content/content.component';
 import { AuthService, AuthStateService } from '@shared-ui';
 import { AsyncPipe, NgIf } from '@angular/common';
+import { AppNavMenuComponent } from '../app-nav-menu/app-nav-menu.component';
+import { NAVIGATION_MENU, NavItem } from '../app-nav-menu/nav-item';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   imports: [
@@ -14,6 +17,8 @@ import { AsyncPipe, NgIf } from '@angular/common';
     ContentComponent,
     AsyncPipe,
     NgIf,
+    AppNavMenuComponent,
+    MatProgressSpinner,
   ],
   selector: 'app-root',
   templateUrl: './app.html',
@@ -28,6 +33,8 @@ export class App implements OnInit {
   showMenu = false;
   isAuthorized = false;
 
+  navItems = NAVIGATION_MENU;
+
   ngOnInit(): void {
     this.authService.restoreSession().subscribe((response) => {
       this.isAuthorized = !!response;
@@ -35,12 +42,11 @@ export class App implements OnInit {
     });
   }
 
-  toggleMenu(): void {
-    this.showMenu = !this.showMenu;
-    this.authState.currentUser$.subscribe((user) =>
-      console.log('Current user:', user)
-    );
-    console.log('Menu toggled:', this.showMenu);
+  toggleMenu(value: boolean): void {
+    this.showMenu = value;
+    this.authState.currentUser$
+      .subscribe((user) => console.log('Current user:', user))
+      .unsubscribe();
   }
 
   @HostListener('document:keydown.escape')
@@ -58,5 +64,13 @@ export class App implements OnInit {
 
   searchHandler(value: Event): void {
     alert('Searched for: ' + (value.target as HTMLInputElement).value);
+  }
+
+  onMenuClose(value: boolean): void {
+    this.showMenu = value;
+  }
+
+  onItemClicked(item: NavItem): void {
+    this.showMenu = false; // Close the menu after an item is clicked
   }
 }

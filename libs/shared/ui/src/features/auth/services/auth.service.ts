@@ -44,7 +44,8 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return this.authStateService.currentUser?.token || null;
+    const storedUser = this.authStateService.loadStoredUser();
+    return storedUser?.token || null;
   }
 
   getMe(): Observable<AuthResponse> {
