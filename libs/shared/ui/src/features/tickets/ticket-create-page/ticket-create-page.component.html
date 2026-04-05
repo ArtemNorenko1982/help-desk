@@ -1,1 +1,17 @@
-<ui-ticket-form></ui-ticket-form>
+<div class="page-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Create New Ticket</mat-card-title>
+      <mat-card-subtitle>Submit a new support request</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <ui-ticket-form
+        mode="create"
+        [isLoading]="isLoading()"
+        [errorMessage]="errorMessage()"
+        (save)="onSave($event)"
+        (cancel)="onCancel()"
+      ></ui-ticket-form>
+    </mat-card-content>
+  </mat-card>
+</div>

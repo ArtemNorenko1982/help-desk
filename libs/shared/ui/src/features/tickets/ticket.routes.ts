@@ -12,12 +12,8 @@ export const ticketRoutes: Routes = [
     children: [
       { path: '', component: TicketsListPageComponent },
       { path: 'create', component: TicketCreatePageComponent },
-      { path: ':id', component: TicketDetailsComponent, 
-        children: [
-            { path: '', component: TicketDetailsComponent, pathMatch: 'full' },
-            { path: 'edit', component: TicketEditPageComponent },
-        ],
-      },
+      { path: ':id', component: TicketDetailsComponent },
+      { path: ':id/edit', component: TicketEditPageComponent },
     ],
   },
 ];

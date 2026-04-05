@@ -1,33 +1,69 @@
-<form class="max-w-lg mx-auto p-4 bg-white shadow-md rounded-md" [formGroup]="ticketForm" (ngSubmit)="submit()">
-  <div class="mb-4">
-    <label for="title"
-      class="block text-sm font-medium text-gray-700">{{ticketForm.controls.title.getRawValue()}}</label>
-  </div>
+<form [formGroup]="ticketForm" (ngSubmit)="onSubmit()" class="ticket-form">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title" placeholder="Enter ticket title" />
+    <mat-error *ngIf="ticketForm.get('title')?.hasError('required')">
+      Title is required
+    </mat-error>
+    <mat-error *ngIf="ticketForm.get('title')?.hasError('minlength')">
+      Title must be at least 3 characters
+    </mat-error>
+    <mat-error *ngIf="ticketForm.get('title')?.hasError('maxlength')">
+      Title must be at most 200 characters
+    </mat-error>
+  </mat-form-field>
 
-  <input id="email" type="email" formControlName="email"
-    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-  <ui-form-field label="Email" [controlId]="'email'" [formControl]="ticketForm.controls.email"
-    hintText="We'll never share your email.">
-  </ui-form-field>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      formControlName="description"
+      rows="5"
+      placeholder="Describe your issue in detail"
+    ></textarea>
+    <mat-error *ngIf="ticketForm.get('description')?.hasError('required')">
+      Description is required
+    </mat-error>
+    <mat-error *ngIf="ticketForm.get('description')?.hasError('minlength')">
+      Description must be at least 10 characters
+    </mat-error>
+  </mat-form-field>
 
-  <div class="mb-4">
-    <label for="priority" class="block text-sm font-medium text-gray-700">Ticket Priority</label>
-    <select id="priority" name="priority"
-      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-      formControlName="priority">
-      @for(item of ticketPriorities; track $index){
-      <option value="item.value">{{item.label}}</option>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Priority</mat-label>
+    <mat-select formControlName="priority">
+      @for (item of ticketPriorities; track item.value) {
+        <mat-option [value]="item.value">{{ item.label }}</mat-option>
       }
-    </select>
-  </div>
+    </mat-select>
+    <mat-error *ngIf="ticketForm.get('priority')?.hasError('required')">
+      Priority is required
+    </mat-error>
+  </mat-form-field>
 
-  <div class="mb-4">
-    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-    <textarea id="description" name="description" rows="4"
-      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
-  </div>
+  @if (isEditMode) {
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        @for (item of ticketStatuses; track item.value) {
+          <mat-option [value]="item.value">{{ item.label }}</mat-option>
+        }
+      </mat-select>
+      <mat-error *ngIf="ticketForm.get('status')?.hasError('required')">
+        Status is required
+      </mat-error>
+    </mat-form-field>
+  }
 
-  <ui-button type="button" variant="ghost" size="md" (click)="submit()">
-    {{submitButtonLabel}}
-  </ui-button>
+  <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+  <div class="form-actions">
+    <button mat-stroked-button type="button" (click)="onCancel()">
+      Cancel
+    </button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">
+      <mat-spinner *ngIf="isLoading" diameter="20" class="inline-spinner"></mat-spinner>
+      <span>{{ submitLabel }}</span>
+    </button>
+  </div>
 </form>

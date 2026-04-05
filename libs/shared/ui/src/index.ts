@@ -34,6 +34,7 @@ export * from './features/tickets/ticket-form/ticket-form.component';
 export * from './features/tickets/ticket.routes';
 
 export * from './lib/models/auth.models';
+export * from './lib/models/ticket.models';
 export * from './lib/services/http.service';
 export * from './features/auth/auth.routes';
 export * from './features/auth/auth.interceptor';

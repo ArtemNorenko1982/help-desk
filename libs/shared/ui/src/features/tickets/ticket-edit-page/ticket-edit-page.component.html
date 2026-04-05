@@ -1,1 +1,27 @@
-<p>ticket-edit-page works!</p>
+<div class="page-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Edit Ticket #{{ ticket()?.id }}</mat-card-title>
+      <mat-card-subtitle>Update ticket details</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="isLoading()" class="loading-container">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+
+      <p *ngIf="errorMessage() && !ticket()" class="error-message">
+        {{ errorMessage() }}
+      </p>
+
+      <ui-ticket-form
+        *ngIf="ticket() && !isLoading()"
+        mode="edit"
+        [ticket]="ticket()"
+        [isLoading]="isSaving()"
+        [errorMessage]="errorMessage()"
+        (save)="onSave($event)"
+        (cancel)="onCancel()"
+      ></ui-ticket-form>
+    </mat-card-content>
+  </mat-card>
+</div>
