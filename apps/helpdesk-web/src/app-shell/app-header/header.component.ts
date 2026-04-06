@@ -38,6 +38,7 @@ export class HeaderComponent {
   // might be taken from service in real app
   protected assistanceButtonLabel = 'Request Assistance';
   protected loginButtonLabel = 'Login';
+  protected logoutButtonLabel = 'Logout';
 
   onMenuClick(): void {
     this.menuButtonClick.emit(!this.showMenu);

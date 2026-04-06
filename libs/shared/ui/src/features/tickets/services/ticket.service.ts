@@ -2,8 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { HttpService } from '../../../lib/services/http.service';
-import { AuthService } from '../../auth/services/auth.service';
-import { TicketModel } from '../../../lib/models/ticket.models';
+import { TicketModel, CreateTicketDto, UpdateTicketDto } from '../../../lib/models/ticket.models';
 import { V1_API_ROUTES } from '../../../lib/constants/v1.api.routes';
 
 @Injectable({
@@ -11,7 +10,6 @@ import { V1_API_ROUTES } from '../../../lib/constants/v1.api.routes';
 })
 export class TicketService {
   private readonly httpService = inject(HttpService);
-  private readonly authService = inject(AuthService);
 
   getMyTickets(): Observable<TicketModel[]> {
     return this.httpService.get<TicketModel[]>(V1_API_ROUTES.TICKETS.GET_MY);
@@ -27,7 +25,7 @@ export class TicketService {
     );
   }
 
-  createTicket(data: Omit<TicketModel, 'id'>): Observable<TicketModel> {
+  createTicket(data: CreateTicketDto): Observable<TicketModel> {
     return this.httpService.post<TicketModel>(
       V1_API_ROUTES.TICKETS.CREATE,
       data
@@ -36,7 +34,7 @@ export class TicketService {
 
   updateTicket(
     id: number,
-    data: Partial<Omit<TicketModel, 'id'>>
+    data: UpdateTicketDto
   ): Observable<TicketModel> {
     return this.httpService.put<TicketModel>(
       V1_API_ROUTES.TICKETS.UPDATE(id),

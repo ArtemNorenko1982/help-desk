@@ -1,2 +1,77 @@
-<p>ticket-details works!</p>
-<router-outlet/>
+<div class="page-container">
+  <div *ngIf="isLoading()" class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <p *ngIf="errorMessage() && !ticket()" class="error-message">
+    {{ errorMessage() }}
+  </p>
+
+  <ng-container *ngIf="ticket() as t">
+    <div class="page-header">
+      <button mat-button (click)="onBack()">
+        <mat-icon>arrow_back</mat-icon>
+        Back to Tickets
+      </button>
+      <button mat-raised-button color="primary" (click)="onEdit()">
+        <mat-icon>edit</mat-icon>
+        Edit Ticket
+      </button>
+    </div>
+
+    <mat-card class="ticket-card">
+      <mat-card-header>
+        <mat-card-title>{{ t.title }}</mat-card-title>
+        <mat-card-subtitle>
+          Ticket #{{ t.id }} &bull; Submitted by {{ t.username }}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="ticket-chips">
+          <mat-chip [color]="getPriorityColor(t.priority)" highlighted>
+            {{ t.priority | titlecase }}
+          </mat-chip>
+          <mat-chip>{{ t.status | titlecase }}</mat-chip>
+        </div>
+
+        <mat-divider class="section-divider"></mat-divider>
+
+        <div class="ticket-description">
+          <h3>Description</h3>
+          <p>{{ t.description }}</p>
+        </div>
+
+        <mat-divider class="section-divider"></mat-divider>
+
+        <div class="ticket-meta">
+          <div class="meta-item">
+            <mat-icon>schedule</mat-icon>
+            <span>Created: {{ t.createdAt | date:'medium' }}</span>
+          </div>
+          <div class="meta-item" *ngIf="t.updatedAt">
+            <mat-icon>update</mat-icon>
+            <span>Updated: {{ t.updatedAt | date:'medium' }}</span>
+          </div>
+        </div>
+
+        <ng-container *ngIf="t.comments?.length">
+          <mat-divider class="section-divider"></mat-divider>
+          <div class="comments-section">
+            <h3>Comments ({{ t.comments.length }})</h3>
+            <mat-card *ngFor="let comment of t.comments" class="comment-card" appearance="outlined">
+              <mat-card-header>
+                <mat-card-subtitle>
+                  {{ comment.username }} &bull; {{ comment.createdAt | date:'medium' }}
+                </mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <p>{{ comment.content }}</p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </ng-container>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</div>

@@ -24,7 +24,7 @@
         {{assistanceButtonLabel}}
       </ui-button>
       <ui-button variant="ghost" size="md" (click)="loginClick.emit()">
-        {{ loginButtonLabel }}
+        {{ isAuthorized ? logoutButtonLabel : loginButtonLabel }}
       </ui-button>
     </div>
   </div>

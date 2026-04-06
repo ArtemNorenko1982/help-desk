@@ -1,0 +1,29 @@
+.page-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  
+  mat-card {
+    mat-card-header {
+      margin-bottom: 16px;
+    }
+
+    .ticket-form-content {
+      padding-top: 8px;
+      display: block;
+        padding: 0 16px;
+        padding-bottom: 16px;
+    }
+  }
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 0.875rem;
+  margin: 16px 0;
+}

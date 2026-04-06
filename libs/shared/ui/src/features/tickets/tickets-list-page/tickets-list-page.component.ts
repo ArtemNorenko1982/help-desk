@@ -12,20 +12,31 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
 import { RouterModule } from '@angular/router';
+import { DatePipe, TitleCasePipe } from '@angular/common';
 
 import { TicketService } from '../services/ticket.service';
 import { TicketModel } from '../../../lib/models/ticket.models';
+import { BadgeComponent } from '@lib/ui/src/lib/badge/badge.component';
 
 @Component({
   selector: 'ui-tickets-list-page',
   imports: [
     RouterModule,
+    DatePipe,
+    TitleCasePipe,
     MatFormFieldModule,
     MatInputModule,
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    MatButtonModule,
+    MatIconModule,
+    MatChipsModule,
+    BadgeComponent,
   ],
   templateUrl: './tickets-list-page.component.html',
   styleUrl: './tickets-list-page.component.scss',
@@ -34,7 +45,14 @@ import { TicketModel } from '../../../lib/models/ticket.models';
 export class TicketsListPageComponent implements AfterViewInit {
   private readonly ticketService = inject(TicketService);
 
-  readonly displayedColumns: string[] = ['id', 'title'];
+  readonly displayedColumns: string[] = [
+    'id',
+    'title',
+    'priority',
+    'status',
+    'createdAt',
+    'actions',
+  ];
   readonly dataSource = new MatTableDataSource<TicketModel>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

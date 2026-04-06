@@ -1,0 +1,102 @@
+.page-container {
+  max-width: 1280px;
+  margin: 0 auto;
+
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 0.875rem;
+  margin: 16px 0;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.ticket-card {
+  mat-card-header {
+    margin-bottom: 16px;
+
+    mat-card-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+  }
+}
+
+.ticket-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.section-divider {
+  margin: 16px 0;
+}
+
+.ticket-description {
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  p {
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+}
+
+.ticket-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 0.875rem;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.comments-section {
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .comment-card {
+    margin-bottom: 12px;
+
+    mat-card-content {
+      padding-top: 8px;
+
+      p {
+        margin: 0;
+        line-height: 1.5;
+      }
+    }
+  }
+}

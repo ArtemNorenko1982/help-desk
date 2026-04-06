@@ -1,8 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Input,
   Output,
+  OnInit,
   inject,
+  EventEmitter,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -10,46 +13,110 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { EventEmitter } from '@angular/core';
-import { ButtonComponent } from '../../../lib/button/button.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgIf } from '@angular/common';
 import {
-  TicketForm,
   TICKET_PRIORITIES as priorities,
   TICKET_STATUSES as statuses,
 } from './ticket-form.type';
-import { FormFieldComponent } from '../../../lib/form-field/form-field.component';
+import { CreateTicketDto, UpdateTicketDto, TicketModel } from '../../../lib/models/ticket.models';
+
+export type TicketFormMode = 'create' | 'edit';
+
+export interface TicketFormValue {
+  title: string;
+  description: string;
+  priority: string;
+  status?: string;
+}
 
 @Component({
   selector: 'ui-ticket-form',
   imports: [
-    FormFieldComponent,
-    ButtonComponent,
     FormsModule,
     ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    NgIf,
   ],
   templateUrl: './ticket-form.component.html',
   styleUrl: './ticket-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TicketFormComponent {
-  protected submitButtonLabel = 'Submit';
-  private formBuilder = inject(FormBuilder);
+export class TicketFormComponent implements OnInit {
+  private readonly fb = inject(FormBuilder);
+
+  @Input() mode: TicketFormMode = 'create';
+  @Input() ticket: TicketModel | null = null;
+  @Input() isLoading = false;
+  @Input() errorMessage: string | null = null;
+
+  @Output() save = new EventEmitter<CreateTicketDto | UpdateTicketDto>();
+  @Output() cancel = new EventEmitter<void>();
+
   readonly ticketPriorities = priorities;
   readonly ticketStatuses = statuses;
-  @Output()
-  save = new EventEmitter<TicketForm>();
 
-  readonly ticketForm = this.formBuilder.group({
-    title: ['Help Desk Request form'],
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
-    email: ['', Validators.email],
-    details: ['', Validators.required],
-    priority: ['', Validators.required],
+  readonly ticketForm = this.fb.group({
+    title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(200)]],
+    description: ['', [Validators.required, Validators.minLength(10)]],
+    priority: ['medium', Validators.required],
     status: ['new', Validators.required],
   });
 
-  submit() {
-    this.save.emit(this.ticketForm.getRawValue() as TicketForm);
+  get submitLabel(): string {
+    return this.mode === 'create' ? 'Create Ticket' : 'Save Changes';
+  }
+
+  get isEditMode(): boolean {
+    return this.mode === 'edit';
+  }
+
+  ngOnInit(): void {
+    if (this.ticket && this.mode === 'edit') {
+      this.ticketForm.patchValue({
+        title: this.ticket.title,
+        description: this.ticket.description,
+        priority: this.ticket.priority,
+        status: this.ticket.status,
+      });
+    }
+  }
+
+  onSubmit(): void {
+    if (this.ticketForm.invalid) {
+      this.ticketForm.markAllAsTouched();
+      return;
+    }
+
+    const { title, description, priority, status } = this.ticketForm.getRawValue();
+
+    if (this.mode === 'create') {
+      const dto: CreateTicketDto = {
+        title: title!,
+        description: description!,
+        priority: priority!,
+      };
+      this.save.emit(dto);
+    } else {
+      const dto: UpdateTicketDto = {
+        title: title ?? undefined,
+        description: description ?? undefined,
+        priority: priority ?? undefined,
+        status: status ?? undefined,
+      };
+      this.save.emit(dto);
+    }
+  }
+
+  onCancel(): void {
+    this.cancel.emit();
   }
 }
