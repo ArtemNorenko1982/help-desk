@@ -59,6 +59,8 @@ export class App implements OnInit {
   }
 
   loginHandler(): void {
+    this.authService.logout();
+    this.isAuthorized = false;
     this.router.navigate(['/login']);
   }
 

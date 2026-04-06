@@ -1,15 +1,17 @@
 .page-container {
-  max-width: 720px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 24px 16px;
-
+  
   mat-card {
     mat-card-header {
       margin-bottom: 16px;
     }
 
-    mat-card-content {
+    .ticket-form-content {
       padding-top: 8px;
+      display: block;
+        padding: 0 16px;
+        padding-bottom: 16px;
     }
   }
 }

@@ -1,5 +1,5 @@
 <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()" class="ticket-form">
-  <mat-form-field appearance="outline" class="full-width">
+  <mat-form-field appearance="fill" class="full-width">
     <mat-label>Title</mat-label>
     <input matInput formControlName="title" placeholder="Enter ticket title" />
     <mat-error *ngIf="ticketForm.get('title')?.hasError('required')">
@@ -13,14 +13,9 @@
     </mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="outline" class="full-width">
+  <mat-form-field appearance="fill" class="full-width">
     <mat-label>Description</mat-label>
-    <textarea
-      matInput
-      formControlName="description"
-      rows="5"
-      placeholder="Describe your issue in detail"
-    ></textarea>
+    <textarea matInput formControlName="description" rows="5" placeholder="Describe your issue in detail"></textarea>
     <mat-error *ngIf="ticketForm.get('description')?.hasError('required')">
       Description is required
     </mat-error>
@@ -29,11 +24,11 @@
     </mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="outline" class="full-width">
+  <mat-form-field appearance="fill" class="full-width">
     <mat-label>Priority</mat-label>
     <mat-select formControlName="priority">
       @for (item of ticketPriorities; track item.value) {
-        <mat-option [value]="item.value">{{ item.label }}</mat-option>
+      <mat-option [value]="item.value">{{ item.label }}</mat-option>
       }
     </mat-select>
     <mat-error *ngIf="ticketForm.get('priority')?.hasError('required')">
@@ -42,17 +37,17 @@
   </mat-form-field>
 
   @if (isEditMode) {
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Status</mat-label>
-      <mat-select formControlName="status">
-        @for (item of ticketStatuses; track item.value) {
-          <mat-option [value]="item.value">{{ item.label }}</mat-option>
-        }
-      </mat-select>
-      <mat-error *ngIf="ticketForm.get('status')?.hasError('required')">
-        Status is required
-      </mat-error>
-    </mat-form-field>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Status</mat-label>
+    <mat-select formControlName="status">
+      @for (item of ticketStatuses; track item.value) {
+      <mat-option [value]="item.value">{{ item.label }}</mat-option>
+      }
+    </mat-select>
+    <mat-error *ngIf="ticketForm.get('status')?.hasError('required')">
+      Status is required
+    </mat-error>
+  </mat-form-field>
   }
 
   <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>

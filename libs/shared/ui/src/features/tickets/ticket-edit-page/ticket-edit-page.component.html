@@ -4,7 +4,7 @@
       <mat-card-title>Edit Ticket #{{ ticket()?.id }}</mat-card-title>
       <mat-card-subtitle>Update ticket details</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content class="ticket-form-content">
       <div *ngIf="isLoading()" class="loading-container">
         <mat-spinner diameter="40"></mat-spinner>
       </div>
@@ -13,15 +13,8 @@
         {{ errorMessage() }}
       </p>
 
-      <ui-ticket-form
-        *ngIf="ticket() && !isLoading()"
-        mode="edit"
-        [ticket]="ticket()"
-        [isLoading]="isSaving()"
-        [errorMessage]="errorMessage()"
-        (save)="onSave($event)"
-        (cancel)="onCancel()"
-      ></ui-ticket-form>
+      <ui-ticket-form *ngIf="ticket() && !isLoading()" mode="edit" [ticket]="ticket()" [isLoading]="isSaving()"
+        [errorMessage]="errorMessage()" (save)="onSave($event)" (cancel)="onCancel()"></ui-ticket-form>
     </mat-card-content>
   </mat-card>
 </div>
