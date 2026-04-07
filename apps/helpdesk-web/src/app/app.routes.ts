@@ -21,6 +21,7 @@ export const appRoutes: Routes = [
   {
     path: 'tickets',
     canActivate: [authGuard],
+    canActivateChild: [authGuard],
     loadChildren: () => import('@shared-ui').then((m) => m.ticketRoutes),
   },
   { path: 'reports', component: ReportsComponent, canActivate: [authGuard] },
