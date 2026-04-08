@@ -5,11 +5,13 @@ export const USER_ROLES = {
     AGENT: 'agent',
 } as const;
 
+export type UserRoleValue = typeof USER_ROLES[keyof typeof USER_ROLES];
+
 export interface UserModel {
     readonly id: number;
     username: string;
     email: string;
-    role: string;
+    role: UserRoleValue;
     createdAt: string;
     updatedAt?: string;
 }
