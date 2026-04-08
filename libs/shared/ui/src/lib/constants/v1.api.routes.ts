@@ -16,9 +16,9 @@ export const V1_API_ROUTES = {
   USERS: {
     GET_ALL: '/api/v1/users',
     GET_BY_ID: (id: number) => `/api/v1/users/${id}`,
+    CREATE: '/api/v1/users',
     UPDATE: (id: number) => `/api/v1/users/${id}`,
     DELETE: (id: number) => `/api/v1/users/${id}`,
-
   },
 } as const;
 

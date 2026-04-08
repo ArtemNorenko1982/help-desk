@@ -1,1 +1,50 @@
-<p>users-details-page works!</p>
+<div class="page-container">
+  <div *ngIf="isLoading()" class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <p *ngIf="errorMessage() && !user()" class="error-message">
+    {{ errorMessage() }}
+  </p>
+
+  <ng-container *ngIf="user() as u">
+    <div class="page-header">
+      <button mat-button (click)="onBack()">
+        <mat-icon>arrow_back</mat-icon>
+        Back to Users
+      </button>
+      <button mat-raised-button color="primary" (click)="onEdit()">
+        <mat-icon>edit</mat-icon>
+        Edit User
+      </button>
+    </div>
+
+    <mat-card class="user-card">
+      <mat-card-header>
+        <mat-card-title>{{ u.username }}</mat-card-title>
+        <mat-card-subtitle>
+          User #{{ u.id }} &bull; {{ u.email }}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-divider class="section-divider"></mat-divider>
+
+        <div class="user-meta">
+          <div class="meta-item">
+            <mat-icon>person</mat-icon>
+            <span>Role: {{ u.role | titlecase }}</span>
+          </div>
+          <div class="meta-item">
+            <mat-icon>schedule</mat-icon>
+            <span>Created: {{ u.createdAt | date:'medium' }}</span>
+          </div>
+          <div class="meta-item" *ngIf="u.updatedAt">
+            <mat-icon>update</mat-icon>
+            <span>Updated: {{ u.updatedAt | date:'medium' }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</div>

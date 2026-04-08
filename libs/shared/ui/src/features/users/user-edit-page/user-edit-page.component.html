@@ -1,1 +1,20 @@
-<p>users-edit-page works!</p>
+<div class="page-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Edit User #{{ user()?.id }}</mat-card-title>
+      <mat-card-subtitle>Update user details</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="user-form-content">
+      <div *ngIf="isLoading()" class="loading-container">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+
+      <p *ngIf="errorMessage() && !user()" class="error-message">
+        {{ errorMessage() }}
+      </p>
+
+      <ui-user-form *ngIf="user() && !isLoading()" mode="edit" [user]="user()" [isLoading]="isSaving()"
+        [errorMessage]="errorMessage()" (save)="onSave($event)" (cancel)="onCancel()"></ui-user-form>
+    </mat-card-content>
+  </mat-card>
+</div>

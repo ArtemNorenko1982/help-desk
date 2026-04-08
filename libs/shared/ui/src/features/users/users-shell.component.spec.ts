@@ -1,16 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UsersShellComponentComponent } from './users-shell.component.component';
+import { provideRouter } from '@angular/router';
+import { UsersShellComponent } from './users-shell.component';
 
-describe('UsersShellComponentComponent', () => {
-  let component: UsersShellComponentComponent;
-  let fixture: ComponentFixture<UsersShellComponentComponent>;
+describe('UsersShellComponent', () => {
+  let component: UsersShellComponent;
+  let fixture: ComponentFixture<UsersShellComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UsersShellComponentComponent],
+      imports: [UsersShellComponent],
+      providers: [provideRouter([])],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(UsersShellComponentComponent);
+    fixture = TestBed.createComponent(UsersShellComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

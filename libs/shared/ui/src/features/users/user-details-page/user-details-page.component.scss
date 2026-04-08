@@ -1,0 +1,58 @@
+.page-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 0.875rem;
+  margin: 16px 0;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.user-card {
+  mat-card-header {
+    margin-bottom: 16px;
+
+    mat-card-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+  }
+}
+
+.section-divider {
+  margin: 16px 0;
+}
+
+.user-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 0.875rem;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+}

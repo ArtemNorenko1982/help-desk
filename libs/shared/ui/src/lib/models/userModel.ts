@@ -6,10 +6,23 @@ export const USER_ROLES = {
 } as const;
 
 export interface UserModel {
-    id: number;
+    readonly id: number;
     username: string;
     email: string;
-    role: keyof typeof USER_ROLES;
+    role: string;
     createdAt: string;
     updatedAt?: string;
+}
+
+export interface CreateUserDto {
+    username: string;
+    email: string;
+    password: string;
+    role: string;
+}
+
+export interface UpdateUserDto {
+    username?: string;
+    email?: string;
+    role?: string;
 }
