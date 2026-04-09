@@ -11,7 +11,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgIf } from '@angular/common';
 import { UserFormComponent } from '../user-form/user-form.component';
 import { UserService } from '../services/user.service';
-import { UserModel, CreateUserDto, UpdateUserDto } from '../../../lib/models/userModel';
+import { UserModel, CreateUserDto } from '../../../lib/models/userModel';
 
 @Component({
   selector: 'ui-user-edit-page',
@@ -52,8 +52,8 @@ export class UserEditPageComponent implements OnInit {
     });
   }
 
-  onSave(dto: CreateUserDto | UpdateUserDto): void {
-    const updateDto = dto as UpdateUserDto;
+  onSave(dto: CreateUserDto | UserModel): void {
+    const updateDto = dto as UserModel;
     this.isSaving.set(true);
     this.errorMessage.set(null);
 

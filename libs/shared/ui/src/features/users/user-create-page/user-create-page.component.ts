@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { UserFormComponent } from '../user-form/user-form.component';
 import { UserService } from '../services/user.service';
-import { CreateUserDto, UpdateUserDto } from '../../../lib/models/userModel';
+import { CreateUserDto, UserModel } from '../../../lib/models/userModel';
 
 @Component({
   selector: 'ui-user-create-page',
@@ -24,7 +24,7 @@ export class UserCreatePageComponent {
   readonly isLoading = signal(false);
   readonly errorMessage = signal<string | null>(null);
 
-  onSave(dto: CreateUserDto | UpdateUserDto): void {
+  onSave(dto: CreateUserDto | UserModel): void {
     const createDto = dto as CreateUserDto;
     this.isLoading.set(true);
     this.errorMessage.set(null);

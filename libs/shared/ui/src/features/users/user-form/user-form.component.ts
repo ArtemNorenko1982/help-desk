@@ -19,7 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgIf } from '@angular/common';
-import { UserModel, CreateUserDto, UpdateUserDto, USER_ROLES } from '../../../lib/models/userModel';
+import { UserModel, CreateUserDto, USER_ROLES } from '../../../lib/models/userModel';
 
 export type UserFormMode = 'create' | 'edit';
 
@@ -47,7 +47,7 @@ export class UserFormComponent implements OnInit {
   @Input() isLoading = false;
   @Input() errorMessage: string | null = null;
 
-  @Output() save = new EventEmitter<CreateUserDto | UpdateUserDto>();
+  @Output() save = new EventEmitter<CreateUserDto | UserModel>();
   @Output() cancel = new EventEmitter<void>();
 
   readonly userRoles = Object.entries(USER_ROLES).map(([, value]) => ({
@@ -98,14 +98,17 @@ export class UserFormComponent implements OnInit {
         username: username!,
         email: email!,
         password: password!,
-        role: role!,
+        role: USER_ROLES[role as keyof typeof USER_ROLES]!,
       };
       this.save.emit(dto);
     } else {
-      const dto: UpdateUserDto = {
-        username: username ?? undefined,
-        email: email ?? undefined,
-        role: role ?? undefined,
+      const dto: UserModel = {
+        id: this.user?.id ?? 0,
+        username: username ?? '',
+        email: email ?? '',
+        role: USER_ROLES[role as keyof typeof USER_ROLES]!,
+        createdAt: this.user?.createdAt ?? new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       };
       this.save.emit(dto);
     }

@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpService } from '../../../lib/services/http.service';
 import { V1_API_ROUTES } from '../../../lib/constants/v1.api.routes';
-import { UserModel, CreateUserDto, UpdateUserDto } from '../../../lib/models/userModel';
+import { UserModel, CreateUserDto } from '../../../lib/models/userModel';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -22,7 +22,7 @@ export class UserService {
     return this.httpService.post<UserModel>(V1_API_ROUTES.USERS.CREATE, data);
   }
 
-  updateUser(id: number, data: UpdateUserDto): Observable<UserModel> {
+  updateUser(id: number, data: UserModel): Observable<UserModel> {
     return this.httpService.put<UserModel>(V1_API_ROUTES.USERS.UPDATE(id), data);
   }
 
