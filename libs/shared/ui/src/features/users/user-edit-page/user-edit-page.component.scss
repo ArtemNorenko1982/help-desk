@@ -1,0 +1,37 @@
+.page-container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 24px 20px 32px;
+
+  mat-card {
+    mat-card-header {
+      margin-bottom: 16px;
+    }
+
+    .user-form-content {
+      padding-top: 8px;
+      display: block;
+      padding: 0 16px;
+      padding-bottom: 16px;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .page-container {
+    padding: 24px 16px 28px;
+  }
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 0.875rem;
+  margin: 16px 0;
+}

@@ -1,27 +1,31 @@
-<div class="overlay-content">
-  <ui-button class="md absolute top-2 right-2" variant="ghost" size="md" (click)="onMenuClose()"
-    aria-label="Close menu">
-    ✕
-  </ui-button>
-  <nav class="p-2 space-y-1">
-    @for (item of navItems; track $index) {
-    @if (!item.requiresAuth) {
-    <ng-container *ngTemplateOutlet="navLink; context: {$implicit: item}"></ng-container>
-    } @else {
-    <ng-container *dirHasPermission="item.requiredPermissions">
-      <ng-container *ngTemplateOutlet="navLink; context: {$implicit: item}">
+<div class="overlay-content" role="dialog" aria-modal="true" aria-label="Application navigation">
+  <div class="menu-panel">
+    <div class="menu-header">
+      <span class="menu-title">Menu</span>
+      <ui-button class="close-button" variant="ghost" size="md" (click)="onMenuClose()" aria-label="Close menu">
+        X
+      </ui-button>
+    </div>
+
+    <nav class="nav-list" aria-label="Primary navigation">
+      @for (item of navItems; track $index) {
+      @if (!item.requiresAuth) {
+      <ng-container *ngTemplateOutlet="navLink; context: {$implicit: item}"></ng-container>
+      } @else {
+      <ng-container *dirHasPermission="item.requiredPermissions">
+        <ng-container *ngTemplateOutlet="navLink; context: {$implicit: item}">
+        </ng-container>
       </ng-container>
-    </ng-container>
-    }
-    }
-  </nav>
+      }
+      }
+    </nav>
+  </div>
 </div>
 
 <ng-template #navLink let-item>
-  <a [routerLink]="item.link" routerLinkActive="bg-ui-surfaceAlt"
-    class="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-ui-surfaceAlt" [attr.title]="item.label"
+  <a [routerLink]="item.link" routerLinkActive="is-active" class="nav-link" [attr.title]="item.label"
     (click)="onItemClicked(item)">
-    <span class="text-lg leading-none">{{ item.icon }}</span>
-    <span class="text-sm font-medium truncate block">{{ item.label }}</span>
+    <span class="nav-icon" aria-hidden="true">{{ item.icon }}</span>
+    <span class="nav-label">{{ item.label }}</span>
   </a>
 </ng-template>

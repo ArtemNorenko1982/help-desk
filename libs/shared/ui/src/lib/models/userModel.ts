@@ -1,15 +1,24 @@
 export const USER_ROLES = {
-    ADMIN: 'admin',
-    USER: 'user',
-    GUEST: 'guest',
-    AGENT: 'agent',
+    ADMIN: 'Admin',
+    USER: 'User',
+    GUEST: 'Guest',
+    AGENT: 'Agent',
 } as const;
 
+export type UserRoleValue = typeof USER_ROLES[keyof typeof USER_ROLES];
+
 export interface UserModel {
-    id: number;
+    id?: number;
     username: string;
     email: string;
-    role: keyof typeof USER_ROLES;
-    createdAt: string;
+    role: UserRoleValue;
+    createdAt?: string;
     updatedAt?: string;
+}
+
+export interface CreateUserDto {
+    username: string;
+    email: string;
+    password: string;
+    role: UserRoleValue;
 }

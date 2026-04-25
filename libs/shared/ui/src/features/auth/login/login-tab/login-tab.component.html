@@ -27,6 +27,8 @@
 
   <p *ngIf="errorMessage()" class="error-message">{{ errorMessage() }}</p>
 
+  <span class="psw">Forgot <a href="#">password?</a></span>
+
   <button mat-raised-button color="primary" type="submit" class="full-width submit-btn" [disabled]="isLoading()">
     <mat-spinner *ngIf="isLoading()" diameter="20" class="inline-spinner"></mat-spinner>
     <span>Sign In</span>

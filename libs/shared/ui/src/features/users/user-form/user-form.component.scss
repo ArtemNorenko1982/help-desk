@@ -1,0 +1,27 @@
+.user-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 0.875rem;
+  margin: 4px 0;
+}
+
+.inline-spinner {
+  display: inline-block;
+  margin: 0 auto;
+}

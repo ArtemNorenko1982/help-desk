@@ -70,3 +70,4 @@ export * from './features/users/user-details-page/user-details-page.component';
 export * from './features/users/user-edit-page/user-edit-page.component';
 
 export * from './features/users/user-form/user-form.component';
+export * from './lib/models/userModel';
