@@ -58,7 +58,7 @@ export class TicketsListPageComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  private readonly tickets = toSignal(this.ticketService.getMyTickets(), {
+  private readonly tickets = toSignal(this.ticketService.getTickets(), {
     initialValue: [] as TicketModel[],
   });
 
