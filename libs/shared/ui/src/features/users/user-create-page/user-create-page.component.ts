@@ -32,7 +32,7 @@ export class UserCreatePageComponent {
     this.userService.createUser(createDto).subscribe({
       next: (user) => {
         this.isLoading.set(false);
-        this.router.navigate(['/users', user.id]);
+        this.router.navigate(['/users']);
       },
       error: (err: Error) => {
         this.isLoading.set(false);

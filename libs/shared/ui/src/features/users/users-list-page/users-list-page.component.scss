@@ -2,21 +2,29 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
   margin: 0 auto;
-  max-width: 1280px;
+  max-width: 1120px;
+  padding: 0 20px 32px;
 }
 
 .users-list-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
   flex-wrap: wrap;
   gap: 12px;
 }
 
 .filter-field {
-  flex: 1;
+  width: 100%;
+  max-width: 420px;
+}
+
+.users-list-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .user-link {
@@ -29,6 +37,29 @@
   }
 }
 
+.users-table {
+  width: 100%;
+  overflow-x: auto;
+  background: #ffffff;
+  border-radius: 8px;
+}
+
 table {
-  width: 80%;
+  width: 100%;
+  min-width: 720px;
+}
+
+@media (max-width: 640px) {
+  .user-list-container {
+    gap: 14px;
+    padding: 0 16px 28px;
+  }
+
+  .filter-field {
+    max-width: none;
+  }
+
+  .users-list-actions a {
+    width: 100%;
+  }
 }

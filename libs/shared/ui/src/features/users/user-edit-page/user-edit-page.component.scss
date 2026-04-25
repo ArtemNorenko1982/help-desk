@@ -1,6 +1,8 @@
 .page-container {
-  max-width: 1280px;
+  width: 100%;
+  max-width: 1120px;
   margin: 0 auto;
+  padding: 24px 20px 32px;
 
   mat-card {
     mat-card-header {
@@ -13,6 +15,12 @@
       padding: 0 16px;
       padding-bottom: 16px;
     }
+  }
+}
+
+@media (max-width: 640px) {
+  .page-container {
+    padding: 24px 16px 28px;
   }
 }
 

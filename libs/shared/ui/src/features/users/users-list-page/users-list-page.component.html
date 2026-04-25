@@ -7,14 +7,14 @@
     </mat-form-field>
   </div>
 
-  <div>
+  <div class="users-list-actions">
     <a mat-raised-button color="primary" [routerLink]="['create']">
       <mat-icon>add</mat-icon>
       New User
     </a>
   </div>
 
-  <div class="mat-elevation-z2">
+  <div class="users-table mat-elevation-z2">
     <table mat-table [dataSource]="dataSource" matSort>
 
       <!-- ID Column -->

@@ -1,6 +1,6 @@
 @if (showMenu) {
-<app-nav-menu class="overlay" [style.height]="showMenu ? '100%' : '0'" [navItems]="navItems" [showMenu]="showMenu"
-  (itemClicked)="onItemClicked($event)" (closeMenu)="onMenuClose($event)"></app-nav-menu>
+<app-nav-menu class="overlay" [navItems]="navItems" [showMenu]="showMenu" (itemClicked)="onItemClicked($event)"
+  (closeMenu)="onMenuClose($event)"></app-nav-menu>
 }
 
 <div class="min-h-[100dvh] bg-ui-bg text-ui-text flex flex-col">
