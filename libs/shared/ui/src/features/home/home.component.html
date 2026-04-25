@@ -1,6 +1,120 @@
-<h1 class="md:block flex-1 text-lg font-semibold text-center">Welcome to the Help Desk service</h1>
+<main class="home-page">
+  <section class="home-hero" aria-labelledby="home-title">
+    <div class="home-hero__content">
+      <h1 id="home-title">Resolve support requests with one visible workflow.</h1>
+      <p class="home-hero__lead">
+        Track tickets from intake to resolution, keep teams accountable, and give users a clear place to ask for help.
+      </p>
 
-<p class="text-center mt-4 text-ui-muted">
-  Please log in to access your account. Use the navigation menu to explore the different features of the Help Desk
-  application. If you need help, don't hesitate to request assistance!
-</p>
+      <div class="home-hero__actions">
+        <a routerLink="/login" class="home-button home-button--secondary">Create account</a>
+      </div>
+    </div>
+
+    <div class="service-card" aria-label="Example service queue">
+      <div class="service-card__header">
+        <span>Today</span>
+        <strong>Support queue</strong>
+      </div>
+      <div class="queue-item queue-item--urgent">
+        <span class="queue-item__status">New</span>
+        <div>
+          <strong>VPN access is blocked</strong>
+          <p>Assigned to IT Support</p>
+        </div>
+      </div>
+      <div class="queue-item queue-item--active">
+        <span class="queue-item__status">In progress</span>
+        <div>
+          <strong>Laptop replacement request</strong>
+          <p>Waiting for approval</p>
+        </div>
+      </div>
+      <div class="queue-item queue-item--done">
+        <span class="queue-item__status">Closed</span>
+        <div>
+          <strong>Email rules restored</strong>
+          <p>Resolution shared with user</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-grid" aria-label="Help desk advantages and tradeoffs">
+    <article class="info-panel">
+      <h2>Why teams use it</h2>
+      <ul>
+        <li>One intake channel for requests instead of scattered chat messages.</li>
+        <li>Clear ownership, priority, status, and history for every ticket.</li>
+        <li>Faster handoff between support agents, admins, and requesters.</li>
+        <li>Reporting that shows volume, bottlenecks, and recurring issues.</li>
+      </ul>
+    </article>
+
+    <article class="info-panel info-panel--muted">
+      <h2>What to watch</h2>
+      <ul>
+        <li>Tickets need good titles and descriptions to avoid slow triage.</li>
+        <li>Status updates must be maintained or users lose trust in the queue.</li>
+        <li>Complex incidents may still require live communication outside the ticket.</li>
+        <li>Access roles should be reviewed so sensitive requests stay protected.</li>
+      </ul>
+    </article>
+  </section>
+
+  <section class="flow-section" aria-labelledby="service-flow-title">
+    <div class="section-heading">
+      <p class="home-eyebrow">Service flow</p>
+      <h2 id="service-flow-title">From request to accountable work</h2>
+    </div>
+
+    <ol class="flow-list">
+      <li>
+        <span>1</span>
+        <strong>Submit request</strong>
+        <p>User describes the issue, impact, and urgency.</p>
+      </li>
+      <li>
+        <span>2</span>
+        <strong>Triage</strong>
+        <p>Support checks priority, category, duplicates, and missing details.</p>
+      </li>
+      <li>
+        <span>3</span>
+        <strong>Assign owner</strong>
+        <p>The ticket moves to the right agent or team for resolution.</p>
+      </li>
+      <li>
+        <span>4</span>
+        <strong>Resolve</strong>
+        <p>Work is completed, documented, and shared with the requester.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="resolution-section" aria-labelledby="resolution-flow-title">
+    <div class="section-heading">
+      <p class="home-eyebrow">Ticket resolution flow</p>
+      <h2 id="resolution-flow-title">A practical path for every ticket</h2>
+    </div>
+
+    <div class="resolution-track">
+      <div class="resolution-step">
+        <strong>New</strong>
+        <p>Request is captured and visible in the queue.</p>
+      </div>
+      <div class="resolution-step">
+        <strong>In progress</strong>
+        <p>Agent investigates, asks questions, or applies a fix.</p>
+      </div>
+      <div class="resolution-step">
+        <strong>Pending user</strong>
+        <p>Ticket waits for confirmation, access, or more context.</p>
+      </div>
+      <div class="resolution-step">
+        <strong>Closed</strong>
+        <p>Resolution is confirmed and saved for future reference.</p>
+      </div>
+    </div>
+  </section>
+</main>
