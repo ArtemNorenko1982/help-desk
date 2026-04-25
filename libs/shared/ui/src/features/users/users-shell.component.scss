@@ -1,4 +1,4 @@
-h2 {
+.users__title {
   width: 100%;
   max-width: 1120px;
   margin: 0 auto;
@@ -10,7 +10,7 @@ h2 {
 }
 
 @media (max-width: 640px) {
-  h2 {
+  .users__title {
     padding: 24px 16px 14px;
     font-size: 26px;
   }

@@ -1,8 +1,17 @@
 h2 {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  width: 100%;
+  max-width: 1120px;
   margin: 0 auto;
-  max-width: 1280px;
-  padding: 24px 16px;
+  padding: 24px 20px 16px;
+  color: #212121;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+@media (max-width: 640px) {
+  h2 {
+    padding: 24px 16px 14px;
+    font-size: 26px;
+  }
 }

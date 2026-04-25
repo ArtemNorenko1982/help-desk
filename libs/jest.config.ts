@@ -1,7 +1,7 @@
 export default {
   displayName: 'libs',
-  preset: '../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  preset: '../jest.preset.js',
+  setupFilesAfterEnv: ['<rootDir>/shared/ui/src/test-setup.ts'],
   coverageDirectory: '../../coverage/libs/',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [

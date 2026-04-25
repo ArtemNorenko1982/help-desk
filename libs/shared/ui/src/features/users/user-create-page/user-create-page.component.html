@@ -1,0 +1,12 @@
+<div class="page-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Create New User</mat-card-title>
+      <mat-card-subtitle>Add a new user account</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="user-form-content">
+      <ui-user-form mode="create" [isLoading]="isLoading()" [errorMessage]="errorMessage()" (save)="onSave($event)"
+        (cancel)="onCancel()"></ui-user-form>
+    </mat-card-content>
+  </mat-card>
+</div>

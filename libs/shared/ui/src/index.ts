@@ -58,3 +58,16 @@ export * from './features/dashboard/mock-data/dashboard.mock';
 export * from './features/reports/reports.component';
 
 export * from './features/settings/settings.component';
+
+export * from './features/users/users-shell.component';
+export * from './features/users/user.routes';
+export * from './features/users/users-list-page/users-list-page.component';
+
+export * from './features/users/user-create-page/user-create-page.component';
+
+export * from './features/users/user-details-page/user-details-page.component';
+
+export * from './features/users/user-edit-page/user-edit-page.component';
+
+export * from './features/users/user-form/user-form.component';
+export * from './lib/models/userModel';

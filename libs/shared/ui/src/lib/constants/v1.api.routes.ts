@@ -13,6 +13,13 @@ export const V1_API_ROUTES = {
     UPDATE: (id: number) => `/api/v1/tickets/${id}`,
     DELETE: (id: number) => `/api/v1/tickets/${id}`,
   },
+  USERS: {
+    GET_ALL: '/api/v1/admin/users',
+    GET_BY_ID: (id: number) => `/api/v1/admin/users/${id}`,
+    CREATE: '/api/v1/admin/users',
+    UPDATE: (id: number) => `/api/v1/admin/users/${id}`,
+    DELETE: (id: number) => `/api/v1/admin/users/${id}`,
+  },
 } as const;
 
 export const AUTH_TOKEN_KEY = 'hd_auth_token';
