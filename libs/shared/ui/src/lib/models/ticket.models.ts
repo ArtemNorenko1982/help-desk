@@ -2,8 +2,17 @@ export interface CommentDto {
   id: number;
   content: string;
   createdAt: string;
+  updatedAt?: string;
   userId: number;
   username: string;
+}
+
+export interface CreateCommentDto {
+  content: string;
+}
+
+export interface UpdateCommentDto {
+  content: string;
 }
 
 export interface TicketModel {

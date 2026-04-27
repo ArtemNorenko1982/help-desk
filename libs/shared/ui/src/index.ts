@@ -31,6 +31,8 @@ export * from './features/tickets/ticket-create-page/ticket-create-page.componen
 export * from './features/tickets/ticket-edit-page/ticket-edit-page.component';
 
 export * from './features/tickets/ticket-form/ticket-form.component';
+export * from './features/tickets/ticket-comments/ticket-comments.component';
+export * from './features/tickets/services/comment.service';
 export * from './features/tickets/ticket.routes';
 
 export * from './lib/models/auth.models';

@@ -6,7 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DatePipe, NgIf, NgFor, TitleCasePipe } from '@angular/common';
+import { DatePipe, NgIf, TitleCasePipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,12 +15,14 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TicketService } from '../services/ticket.service';
 import { TicketModel } from '../../../lib/models/ticket.models';
+import { AuthStateService } from '../../auth/services/auth-state.service';
+import { UserRole } from '../../../lib/models/auth.models';
+import { TicketCommentsComponent } from '../ticket-comments/ticket-comments.component';
 
 @Component({
   selector: 'ui-ticket-details',
   imports: [
     NgIf,
-    NgFor,
     DatePipe,
     TitleCasePipe,
     MatCardModule,
@@ -29,6 +31,7 @@ import { TicketModel } from '../../../lib/models/ticket.models';
     MatChipsModule,
     MatDividerModule,
     MatProgressSpinnerModule,
+    TicketCommentsComponent,
   ],
   templateUrl: './ticket-details.component.html',
   styleUrl: './ticket-details.component.scss',
@@ -36,6 +39,7 @@ import { TicketModel } from '../../../lib/models/ticket.models';
 })
 export class TicketDetailsComponent implements OnInit {
   private readonly ticketService = inject(TicketService);
+  private readonly authStateService = inject(AuthStateService);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
 
@@ -47,7 +51,19 @@ export class TicketDetailsComponent implements OnInit {
     return Number(this.route.snapshot.paramMap.get('id'));
   }
 
+  get currentUsername(): string | null {
+    return this.authStateService.currentUser?.username ?? null;
+  }
+
+  get currentUserRole(): UserRole | null {
+    return this.authStateService.currentUser?.role ?? null;
+  }
+
   ngOnInit(): void {
+    this.loadTicket();
+  }
+
+  onCommentsChanged(): void {
     this.loadTicket();
   }
 
