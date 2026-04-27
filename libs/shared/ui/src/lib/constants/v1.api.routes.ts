@@ -13,6 +13,13 @@ export const V1_API_ROUTES = {
     UPDATE: (id: number) => `/api/v1/tickets/${id}`,
     DELETE: (id: number) => `/api/v1/tickets/${id}`,
   },
+  COMMENTS: {
+    GET_BY_TICKET: (ticketId: number) => `/api/v1/tickets/${ticketId}/comments`,
+    GET_BY_ID: (id: number) => `/api/v1/comments/${id}`,
+    CREATE: (ticketId: number) => `/api/v1/tickets/${ticketId}/comments`,
+    UPDATE: (id: number) => `/api/v1/comments/${id}`,
+    DELETE: (id: number) => `/api/v1/comments/${id}`,
+  },
   USERS: {
     GET_ALL: '/api/v1/admin/users',
     GET_BY_ID: (id: number) => `/api/v1/admin/users/${id}`,

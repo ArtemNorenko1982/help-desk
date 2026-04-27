@@ -47,30 +47,23 @@
         <div class="ticket-meta">
           <div class="meta-item">
             <mat-icon>schedule</mat-icon>
-            <span>Created: {{ t.createdAt | date:'medium' }}</span>
+            <span>Created: {{ t.createdAt | date : 'medium' }}</span>
           </div>
           <div class="meta-item" *ngIf="t.updatedAt">
             <mat-icon>update</mat-icon>
-            <span>Updated: {{ t.updatedAt | date:'medium' }}</span>
+            <span>Updated: {{ t.updatedAt | date : 'medium' }}</span>
           </div>
         </div>
 
-        <ng-container *ngIf="t.comments?.length">
-          <mat-divider class="section-divider"></mat-divider>
-          <div class="comments-section">
-            <h3>Comments ({{ t.comments.length }})</h3>
-            <mat-card *ngFor="let comment of t.comments" class="comment-card" appearance="outlined">
-              <mat-card-header>
-                <mat-card-subtitle>
-                  {{ comment.username }} &bull; {{ comment.createdAt | date:'medium' }}
-                </mat-card-subtitle>
-              </mat-card-header>
-              <mat-card-content>
-                <p>{{ comment.content }}</p>
-              </mat-card-content>
-            </mat-card>
-          </div>
-        </ng-container>
+        <mat-divider class="section-divider"></mat-divider>
+
+        <ui-ticket-comments
+          [ticketId]="t.id"
+          [comments]="t.comments"
+          [currentUsername]="currentUsername"
+          [currentUserRole]="currentUserRole"
+          (commentsChanged)="onCommentsChanged()"
+        ></ui-ticket-comments>
       </mat-card-content>
     </mat-card>
   </ng-container>

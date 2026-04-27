@@ -1,0 +1,132 @@
+<section class="comments-section">
+  <div class="comments-header">
+    <h3>Comments ({{ comments.length }})</h3>
+  </div>
+
+  <form
+    [formGroup]="commentForm"
+    (ngSubmit)="createComment()"
+    class="comment-form"
+  >
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Add comment</mat-label>
+      <textarea
+        matInput
+        formControlName="content"
+        rows="3"
+        placeholder="Write a comment"
+      ></textarea>
+      <mat-error *ngIf="commentForm.get('content')?.hasError('required')">
+        Comment is required
+      </mat-error>
+      <mat-error *ngIf="commentForm.get('content')?.hasError('minlength')">
+        Comment must be at least 2 characters
+      </mat-error>
+    </mat-form-field>
+
+    <div class="comment-actions">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="isSaving()"
+      >
+        <mat-spinner
+          *ngIf="isSaving() && !editingCommentId()"
+          diameter="18"
+          class="inline-spinner"
+        ></mat-spinner>
+        <mat-icon *ngIf="!isSaving() || editingCommentId()"
+          >add_comment</mat-icon
+        >
+        <span>Add Comment</span>
+      </button>
+    </div>
+  </form>
+
+  <p *ngIf="errorMessage()" class="error-message">{{ errorMessage() }}</p>
+
+  <p *ngIf="!comments.length" class="empty-message">No comments yet.</p>
+
+  <mat-card
+    *ngFor="let comment of comments"
+    class="comment-card"
+    appearance="outlined"
+  >
+    <mat-card-header>
+      <mat-card-subtitle>
+        {{ comment.username }} &bull; {{ comment.createdAt | date : 'medium' }}
+      </mat-card-subtitle>
+
+      <div class="comment-menu" *ngIf="canManage(comment)">
+        <button
+          mat-icon-button
+          type="button"
+          aria-label="Edit comment"
+          (click)="startEdit(comment)"
+          [disabled]="
+            !!editingCommentId() || deletingCommentId() === comment.id
+          "
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          type="button"
+          aria-label="Delete comment"
+          (click)="deleteComment(comment.id)"
+          [disabled]="deletingCommentId() === comment.id"
+        >
+          <mat-spinner
+            *ngIf="deletingCommentId() === comment.id"
+            diameter="18"
+          ></mat-spinner>
+          <mat-icon *ngIf="deletingCommentId() !== comment.id">delete</mat-icon>
+        </button>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form
+        *ngIf="editingCommentId() === comment.id; else commentContent"
+        [formGroup]="editForm"
+        (ngSubmit)="updateComment(comment.id)"
+        class="edit-comment-form"
+      >
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Edit comment</mat-label>
+          <textarea matInput formControlName="content" rows="3"></textarea>
+          <mat-error *ngIf="editForm.get('content')?.hasError('required')">
+            Comment is required
+          </mat-error>
+          <mat-error *ngIf="editForm.get('content')?.hasError('minlength')">
+            Comment must be at least 2 characters
+          </mat-error>
+        </mat-form-field>
+
+        <div class="comment-actions">
+          <button mat-stroked-button type="button" (click)="cancelEdit()">
+            Cancel
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="isSaving()"
+          >
+            <mat-spinner
+              *ngIf="isSaving()"
+              diameter="18"
+              class="inline-spinner"
+            ></mat-spinner>
+            <span>Save</span>
+          </button>
+        </div>
+      </form>
+
+      <ng-template #commentContent>
+        <p>{{ comment.content }}</p>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
+</section>
